@@ -1,7 +1,0 @@
-The user will be able to install the package using pip (pypi)
-- pip install dgupdater
-
-The user will select which files to include in the app while publishing for first time
-
-The user should be able to add or remove files in the next upcoming updates
-
