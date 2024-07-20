@@ -7,7 +7,7 @@
   packages = [
     # pkgs.go
     pkgs.python312Packages.python
-    # pkgs.python311Packages.pip
+    pkgs.python312Packages.pip
     # pkgs.nodejs_20
     # pkgs.nodePackages.nodemon
   ];
