@@ -14,7 +14,6 @@ setup(
         "Programming Language :: Python :: 3.12",
         "License :: OSI Approved :: MIT License",
         "Operating System :: Microsoft :: Windows",
-
     ],
     python_requires='>=3.6',
     install_requires=[
