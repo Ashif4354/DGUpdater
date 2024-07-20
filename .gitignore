@@ -1,1 +1,12 @@
 plan.txt
+
+# Virtual Environments
+venv/
+
+#tests
+tests/
+
+# Builds
+dgupdater.egg-info/
+dist/
+build/
