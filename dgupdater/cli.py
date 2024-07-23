@@ -1,6 +1,6 @@
-from click import group, command, echo
+from click import group
 
-from .init.init import init
+from .cli_commands.init.init import init
 
 @group()
 def cli():

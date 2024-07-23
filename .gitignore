@@ -3,10 +3,13 @@ plan.txt
 # Virtual Environments
 venv/
 
-#tests
+# Tests
 tests/
 
 # Builds
 dgupdater.egg-info/
 dist/
 build/
+
+# Pycache
+*.pyc

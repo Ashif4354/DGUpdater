@@ -1,3 +1,2 @@
-Get started by customizing your environment (defined in the .idx/dev.nix file) with the tools and IDE extensions you'll need for your project!
+You need to have a mongodb database preferrably on cloud. You can use mongodb atlas for the same, MongoDB have a serverless db cluster which is very cheap (0.1$ / 1M reads). they also have a good free tier. After configuring, get the connection url and save it.
 
-Learn more at https://developers.google.com/idx/guides/customize-idx-env

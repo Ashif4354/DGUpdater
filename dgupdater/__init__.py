@@ -1,3 +1,3 @@
-from .dgupdater import cli
-from .check_update.check_update import check_update 
+from .functions.check_update import check_update 
+from .cli import cli
 
