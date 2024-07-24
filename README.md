@@ -1,2 +1,4 @@
 You need to have a mongodb database preferrably on cloud. You can use mongodb atlas for the same, MongoDB have a serverless db cluster which is very cheap (0.1$ / 1M reads). they also have a good free tier. After configuring, get the connection url and save it.
 
+You need to get two connection string from mongo db, one with write access and one with read access. 
+the one with write access will be used by the developer to write data to the database and the one with read access will be used by the client to read data from the database. both the connection string should have access to the same cluser and databases.
