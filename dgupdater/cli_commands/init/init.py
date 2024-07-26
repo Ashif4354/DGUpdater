@@ -25,12 +25,11 @@ arguments = {
     }    
 }
 
-
+#template
 dgupdaterconf_json = {
     "_id": "",
     "app_name": "",
     "version": "",
-    # "mongodb_connection_string_developer": "",
     "mongodb_connection_string_client": "",
     "files_in_latest_version": []
 }
@@ -42,8 +41,9 @@ dgupdaterconf_json = {
 @option("--mongodbstrd", "-md", callback = check_mongo_string, required = True, prompt = arguments["mongodb_connection_string_write"]["prompt"], help = arguments["mongodb_connection_string_write"]["help"])
 @option("--mongodbstrc", "-mc", callback = check_mongo_string, required = True, prompt = arguments["mongodb_connection_string_read"]["prompt"], help = arguments["mongodb_connection_string_read"]["help"])
 def init(name: str, version: str, mongodbstrd: str, mongodbstrc: str) -> None:
+    # print(name, version, mongodbstrd, mongodbstrc)    
 
-    echo("\n\nInitializing this directory for autoupdation...")
+    echo("\nInitializing this directory for autoupdation...")
 
     app_exists, over_write = check_app_exists(name, mongodbstrd)
 
@@ -51,15 +51,11 @@ def init(name: str, version: str, mongodbstrd: str, mongodbstrc: str) -> None:
         echo("Initialization Aborted.")
         return
     elif app_exists and over_write:
-        echo("Overwriting the existing application.")
+        echo("Overwriting the existing application.")    
     
-    
-    
-    dgupdaterconf_json["_id"] = name
+    dgupdaterconf_json["_id"] = name + '_config'
     dgupdaterconf_json["app_name"] = name
     dgupdaterconf_json["version"] = version
-    # dgupdaterconf_json["mongodb_connection_string"] = mongodbstr
-    # dgupdaterconf_json["mongodb_connection_string_developer"] = mongodbstrd
     dgupdaterconf_json["mongodb_connection_string_client"] = mongodbstrc
     dgupdaterconf_json["files_in_latest_version"] = find_files()
 

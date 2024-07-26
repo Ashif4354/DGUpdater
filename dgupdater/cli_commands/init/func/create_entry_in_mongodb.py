@@ -5,8 +5,8 @@ def create_entry_in_mongodb(dgupdaterconf_json: dict[str:any], mongodbstrd: str,
     try:
         with MongoClient(mongodbstrd) as client:
 
-            db = client[dgupdaterconf_json["app_name"]]
-            collection = db["dgupdaterconf"]
+            db = client['DGUPDATER']
+            collection = db[dgupdaterconf_json["app_name"]]
 
             if over_write:
                 collection.delete_one({"_id": dgupdaterconf_json["_id"]})

@@ -11,7 +11,7 @@ def find_files() -> list:
 
     for root, dirs, files in walk(getcwd()):
 
-        # Ignore logic start
+        # start: Ignore files logic
         ignore = False
         for ignored in ignored_list:
             if ignored in root:
@@ -19,7 +19,7 @@ def find_files() -> list:
         if ignore:
             ignore = False
             continue
-        # Ignore logic end
+        # end: Ignore files logic
 
         dirs = [dir for dir in dirs if dir not in ignored_list]
         files = [file for file in files if file not in ignored_list]

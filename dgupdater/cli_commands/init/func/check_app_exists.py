@@ -5,11 +5,12 @@ def check_app_exists(name: str, mongostr: str) -> bool:
     
     try:
         with MongoClient(mongostr) as client:
-            dbs = [db.lower() for db in client.list_database_names()]
+            db = client['DGUPDATER']
+            collections = [collection.lower() for collection in db.list_collection_names()]
     except Exception as e:
         echo("Some error occured. Please try again.")
 
-    if name.lower() in dbs:
+    if name.lower() in collections:
         echo("\nApplication with the same name already exists in Mongodb.\n")
 
         if prompt("Do you want to overwrite the existing application? (y/n): ").lower() in ["y", "yes" ]:
