@@ -5,6 +5,8 @@ venv/
 
 # Tests
 tests/
+main.py
+dgupdaterconf.json
 
 # Builds
 dgupdater.egg-info/

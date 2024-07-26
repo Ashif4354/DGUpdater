@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="dgupdater",
-    version="0.1.0",
+    version="0.1.1",
     author="DarkGlance",
     author_email="darkglance.developer@gmail.com",
     description="A CLI based auto updation assistant tool for python applications",
@@ -12,13 +12,19 @@ setup(
     # url="https://github.com/Ashif4354/dgupdater",
     packages=find_packages(),
     classifiers=[
+        'Intended Audience :: Developers',
+        'Development Status :: 2 - Pre-Alpha'
         "Programming Language :: Python :: 3.12",
         "License :: OSI Approved :: MIT License",
         "Operating System :: Microsoft :: Windows",
+        'Topic :: Utilities'
     ],
     python_requires='>=3.6',
     install_requires=[
         "click>=7.0",
+        "pymongo",
+        "platformdirs"
+
     ],
     entry_points={
         'console_scripts': [
