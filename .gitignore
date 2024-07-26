@@ -1,10 +1,13 @@
 plan.txt
+.dgupdaterignore
 
 # Virtual Environments
 venv/
 
 # Tests
 tests/
+main.py
+dgupdaterconf.json
 
 # Builds
 dgupdater.egg-info/
