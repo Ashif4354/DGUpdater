@@ -36,8 +36,11 @@ def find_files() -> list:
 
 
 def get_ignore_list() -> list:
-    with open('.dgupdaterignore', 'r') as file:
-        return [line.split('\n')[0] for line in file.readlines()]
+    try:
+        with open('.dgupdaterignore', 'r') as file:
+            return [line.split('\n')[0] for line in file.readlines()]
+    except FileNotFoundError:
+        return []
 
 if __name__ == "__main__":
     print(get_ignore_list())
