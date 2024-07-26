@@ -1,4 +1,5 @@
 plan.txt
+.dgupdaterignore
 
 # Virtual Environments
 venv/
