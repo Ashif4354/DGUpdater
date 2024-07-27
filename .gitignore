@@ -1,20 +1,23 @@
 # misc
 plan.txt
+notes.txt
 .dgupdaterignore
 .env
+*.exe
 
 # Virtual Environments
 venv/
 
 # Tests
 tests/
-main.py
+dgupdater.py
 dgupdaterconf.json
 
-# Builds
+# Builds & release
 dgupdater.egg-info/
 dist/
 build/
+release/
 
 # Pycache
 *.pyc

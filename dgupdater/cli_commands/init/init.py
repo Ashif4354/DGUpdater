@@ -2,7 +2,6 @@ from click import command, echo, option
 
 from .func.check_mongo_string import check_mongo_string
 from .func.check_app_exists import check_app_exists
-from .func.find_files import find_files
 from .func.create_entry_in_mongodb import create_entry_in_mongodb
 from .func.create_configuration_files import create_configuration_files
 
@@ -57,7 +56,7 @@ def init(name: str, version: str, mongodbstrd: str, mongodbstrc: str) -> None:
     dgupdaterconf_json["app_name"] = name
     dgupdaterconf_json["version"] = version
     dgupdaterconf_json["mongodb_connection_string_client"] = mongodbstrc
-    dgupdaterconf_json["files_in_latest_version"] = find_files()
+    dgupdaterconf_json["files_in_latest_version"] = 'Files will be listed after publishing the changes.'
 
     create_entry_in_mongodb(dgupdaterconf_json, mongodbstrd, over_write)
 

@@ -29,6 +29,9 @@ def create_configuration_files(data: dict, app_name: str, mongodbstrd: str) -> N
     with open(file, "w") as f:
         dump(dgupdaterconf_json, f, indent = 4)
 
+    with open('.dgupdaterignore', 'w') as f:
+        f.write('')
+
 
 
 if __name__ == "__main__":
