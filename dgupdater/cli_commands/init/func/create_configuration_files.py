@@ -14,20 +14,19 @@ def create_configuration_files(data: dict, app_name: str, mongodbstrd: str) -> N
     dgupdaterconf_json = {
         'mongodbstrds': {}
     }
+
+    file = join(dgupdater_dir, "dgupdaterconf.json")
     
     try:
-        if exists(join(dgupdater_dir, "dgupdaterconf.json")):
-            with open(join(dgupdater_dir, "dgupdaterconf.json"), "r") as f:
+        if exists(file):
+            with open(file, 'r') as f:
                 dgupdaterconf_json = load(f)
     except JSONDecodeError as e:
         pass
 
-    dgupdaterconf_json['mongodbstrds'][app_name] = mongodbstrd
+    dgupdaterconf_json['mongodbstrds'][app_name] = mongodbstrd    
     
-    
-
-
-    with open(join(dgupdater_dir, "dgupdaterconf.json"), "w") as f:
+    with open(file, "w") as f:
         dump(dgupdaterconf_json, f, indent = 4)
 
 
