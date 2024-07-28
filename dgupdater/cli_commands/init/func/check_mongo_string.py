@@ -12,6 +12,9 @@ def check_mongo_string(ctx, param, value: str) -> str|None:
 
     echo('Verifying MongoDB Connection String...')
 
+    if not value.startswith('mongodb'):
+        raise BadParameter("Enter a Valid MongoDB Connection String")
+
     try:
         client = MongoClient(value, serverSelectionTimeoutMS = 3000)
         client.admin.command('ping')
@@ -19,10 +22,10 @@ def check_mongo_string(ctx, param, value: str) -> str|None:
         echo("Verified !!\n")
         return value + '*VERIFIEDONCE*'  # *VERIFIEDONCE* is added to the end of the string to detect second execution of callback of click.options()
     except ConnectionFailure as _:
-        print()
+        echo()
         raise BadParameter("Enter a Valid MongoDB Connection String")
     except Exception as e:
-        raise UsageError("Some error occured. Please try again." + str(e))
+        raise UsageError("Some error occured. Try again." + str(e))
         
     
 

@@ -1,21 +1,18 @@
 from os.path import exists
-from click import echo
+from click import echo, UsageError
 from json import load
-from ...init.init import dgupdaterconf_json
 
+from ...init.init import dgupdaterconf_json as template_dgupdaterconf_json
 
-def check_configuration_files_exists() -> bool:
+def check_configuration_files_exists() -> None:
     if not exists('dgupdaterconf.json'):
-        echo("\ndgupdaterconf.json not found. Run 'dgupdater init' first. \nAlso check if you are in the correct directory.")
-        return False
+        raise UsageError("'dgupdaterconf.json' file not found. Run 'dgupdater init' first. Also check if you are in the correct directory.")
     
     with open('dgupdaterconf.json') as f:
-        dgupdaterconf_json_ = load(f)
+        dgupdaterconf_json = load(f)
 
-    if (dgupdaterconf_json_.keys() != dgupdaterconf_json.keys()):
-        echo("dgupdaterconf.json is not valid. \nTry 'dgupdater init' again.")
-        return False
-    
-    return True
+    if (dgupdaterconf_json.keys() != template_dgupdaterconf_json.keys()):
+        raise UsageError("'dgupdaterconf.json' file seems to be corrupted. Try 'dgupdater init' again.")
+
 
 

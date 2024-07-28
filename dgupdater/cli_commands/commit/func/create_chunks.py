@@ -1,6 +1,8 @@
 from json import dump
 from math import ceil
 from tqdm import tqdm
+from os.path import join
+from os import getcwd
 
 
 def create_chunks(release_json_str: str, app_name: str) -> int:
@@ -13,7 +15,7 @@ def create_chunks(release_json_str: str, app_name: str) -> int:
     
     start = 0
     
-    with tqdm(total = no_of_chunks, desc = "Creating Chunks", ncols = 110, unit='chunks') as pbar:
+    with tqdm(total = no_of_chunks, desc = "Creating Chunks", ncols = 110, unit='chunks') as pbar: # progres bar
         
         for i in range(no_of_chunks):
             chunk_part = i + 1
@@ -26,12 +28,14 @@ def create_chunks(release_json_str: str, app_name: str) -> int:
                 'chunk_data': chunk
             }
 
-            with open(f'dgupdater_release/chunks/{chunk_name}.json', 'w') as f:
+            with open(join(getcwd(), 'dgupdater_release', 'chunks', f'{chunk_name}.json'), 'w') as f:
                 dump(chunk, f, indent = 4)
 
             start += max_chunk_size
             pbar.update(1)
 
     return no_of_chunks
+
+
 
 
