@@ -18,7 +18,7 @@ def check_mongo_string(ctx, param, value: str) -> str|None:
         
         echo("Verified !!\n")
         return value + '*VERIFIEDONCE*'  # *VERIFIEDONCE* is added to the end of the string to detect second execution of callback of click.options()
-    except ConnectionFailure as e:
+    except ConnectionFailure as _:
         print()
         raise BadParameter("Enter a Valid MongoDB Connection String")
     except Exception as e:

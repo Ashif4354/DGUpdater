@@ -17,7 +17,7 @@ dgupdaterconf.json
 dgupdater.egg-info/
 dist/
 build/
-release/
+dgupdater_release/
 
 # Pycache
 *.pyc
