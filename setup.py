@@ -16,7 +16,7 @@ setup(
         'Development Status :: 2 - Pre-Alpha',
         "Programming Language :: Python :: 3.12",
         "License :: OSI Approved :: MIT License",
-        "Operating System :: Platform Independent",
+        "Operating System :: OS Independent",
         'Topic :: Utilities'
     ],
     python_requires='>=3.6',
