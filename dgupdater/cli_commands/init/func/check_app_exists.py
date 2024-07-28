@@ -7,7 +7,7 @@ def check_app_exists(name: str, mongostr: str) -> bool:
         with MongoClient(mongostr) as client:
             db = client['DGUPDATER']
             collections = [collection.lower() for collection in db.list_collection_names()]
-    except Exception as e:
+    except Exception as _:
         echo("Some error occured. Please try again.")
 
     if name.lower() in collections:

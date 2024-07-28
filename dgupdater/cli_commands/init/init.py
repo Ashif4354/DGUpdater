@@ -2,7 +2,6 @@ from click import command, echo, option
 
 from .func.check_mongo_string import check_mongo_string
 from .func.check_app_exists import check_app_exists
-from .func.find_files import find_files
 from .func.create_entry_in_mongodb import create_entry_in_mongodb
 from .func.create_configuration_files import create_configuration_files
 
@@ -27,6 +26,7 @@ arguments = {
 
 #template
 dgupdaterconf_json = {
+    "obj_type": "config",
     "_id": "",
     "app_name": "",
     "version": "",
@@ -36,11 +36,10 @@ dgupdaterconf_json = {
 
 
 @command()
-@option("--name", "-n", required = True, prompt = arguments["name"]["prompt"], help = arguments["name"]["help"])
-@option("--version", "-v", required = True, prompt = arguments["version"]["prompt"], help = arguments["version"]["help"])    
+@option("--name", "-n", required = True, prompt = arguments["name"]["prompt"], help = arguments["name"]["help"])  
 @option("--mongodbstrd", "-md", callback = check_mongo_string, required = True, prompt = arguments["mongodb_connection_string_write"]["prompt"], help = arguments["mongodb_connection_string_write"]["help"])
 @option("--mongodbstrc", "-mc", callback = check_mongo_string, required = True, prompt = arguments["mongodb_connection_string_read"]["prompt"], help = arguments["mongodb_connection_string_read"]["help"])
-def init(name: str, version: str, mongodbstrd: str, mongodbstrc: str) -> None:
+def init(name: str, mongodbstrd: str, mongodbstrc: str) -> None:
     # print(name, version, mongodbstrd, mongodbstrc)    
 
     echo("\nInitializing this directory for autoupdation...")
@@ -55,9 +54,9 @@ def init(name: str, version: str, mongodbstrd: str, mongodbstrc: str) -> None:
     
     dgupdaterconf_json["_id"] = name + '_config'
     dgupdaterconf_json["app_name"] = name
-    dgupdaterconf_json["version"] = version
+    dgupdaterconf_json["version"] = "Version will be updated after publishing the changes."
     dgupdaterconf_json["mongodb_connection_string_client"] = mongodbstrc
-    dgupdaterconf_json["files_in_latest_version"] = find_files()
+    dgupdaterconf_json["files_in_latest_version"] = 'Files will be listed after publishing the changes.'
 
     create_entry_in_mongodb(dgupdaterconf_json, mongodbstrd, over_write)
 

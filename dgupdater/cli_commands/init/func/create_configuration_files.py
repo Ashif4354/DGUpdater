@@ -21,13 +21,16 @@ def create_configuration_files(data: dict, app_name: str, mongodbstrd: str) -> N
         if exists(file):
             with open(file, 'r') as f:
                 dgupdaterconf_json = load(f)
-    except JSONDecodeError as e:
+    except JSONDecodeError as _:
         pass
 
     dgupdaterconf_json['mongodbstrds'][app_name] = mongodbstrd    
     
     with open(file, "w") as f:
         dump(dgupdaterconf_json, f, indent = 4)
+
+    with open('.dgupdaterignore', 'w') as f:
+        f.write('')
 
 
 

@@ -39,7 +39,7 @@ def get_ignore_list() -> list:
     try:
         with open('.dgupdaterignore', 'r') as file:
             return [line.split('\n')[0] for line in file.readlines()]
-    except FileNotFoundError:
+    except FileNotFoundError as _:
         return []
 
 if __name__ == "__main__":
