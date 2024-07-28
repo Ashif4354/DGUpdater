@@ -8,7 +8,7 @@ def check_app_exists(name: str, mongostr: str) -> bool:
             db = client['DGUPDATER']
             collections = [collection.lower() for collection in db.list_collection_names()]
     except Exception as _:
-        echo("Some error occured. Please try again.")
+        echo("Some error occured. Try again.")
 
     if name.lower() in collections:
         echo("\nApplication with the same name already exists in Mongodb.\n")

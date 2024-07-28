@@ -3,13 +3,12 @@ from setuptools import setup, find_packages
 
 setup(
     name="dgupdater",
-    version="0.3.0",
+    version="0.3.2",
     author="DarkGlance",
     author_email="darkglance.developer@gmail.com",
     description="A CLI based auto updation assistant tool for python applications",
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
-    # url="https://github.com/Ashif4354/dgupdater",
     packages=find_packages(),
     classifiers=[
         'Intended Audience :: Developers',
@@ -33,5 +32,16 @@ setup(
     },
     project_urls = {
         'Github': "https://github.com/Ashif4354/dgupdater"
-    }
+    },
+    keywords= [
+        'dgupdater', 'auto updater', 
+        'cli tool', 'python', 
+        'python application', 'auto updation', 
+        'auto update', 'update',
+        'cli', 'command line interface'
+        'no code', 'low code', 'no code tool',
+        'mongodb', 'pymongo', 'click', 
+        'darkglance', 'darkglance developer',
+        'ashif', 'pypi', 'pip',
+    ]
 )

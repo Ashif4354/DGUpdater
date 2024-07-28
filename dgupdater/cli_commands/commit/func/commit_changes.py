@@ -1,4 +1,5 @@
 from os import makedirs, getcwd
+from os.path import join
 from json import load, dump, dumps
 from shutil import rmtree
 
@@ -44,9 +45,8 @@ def commit_changes() -> None:
     dgupdaterconf_json['no_of_chunks'] = no_of_chunks
     dgupdaterconf_json['files_in_latest_version'] = release_files
 
-    with open(f'{getcwd()}/dgupdater_release/dgupdaterconf.json', 'w') as f:
+    with open(join(getcwd(), 'dgupdater_release', 'dgupdaterconf.json'), 'w') as f:
         dump(dgupdaterconf_json, f, indent = 4)
-
 
 if __name__ == "__main__":
     commit_changes()

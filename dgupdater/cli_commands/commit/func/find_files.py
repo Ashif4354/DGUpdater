@@ -8,6 +8,7 @@ def find_files() -> list:
     retrieved_files = []
 
     ignored_list = get_ignore_list()
+    ignored_list.append('dgupdater_release')
 
     for root, dirs, files in walk(getcwd()):
 
