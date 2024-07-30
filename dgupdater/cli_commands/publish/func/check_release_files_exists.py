@@ -38,6 +38,3 @@ def check_keys(base_dict: dict, compare_dict: dict) -> bool:
             return True
         
     return False  
-
-if __name__ == "__main__":
-    pass

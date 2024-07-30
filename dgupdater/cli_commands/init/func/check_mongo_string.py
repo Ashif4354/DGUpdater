@@ -27,7 +27,3 @@ def check_mongo_string(ctx, param, value: str) -> str|None:
     except Exception as e:
         raise UsageError("Some error occured. Try again." + str(e))
         
-    
-
-if __name__ == "__main__":
-    print(check_mongo_string(1, 1, 'a'))

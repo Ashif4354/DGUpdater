@@ -54,8 +54,8 @@ def commit_changes() -> None:
 
     release_json_str = dumps(release_json)
 
-    with open('dgupdater_release/release.json', 'w') as f:
-        dump(release_json, f, indent = 4)
+    # with open('dgupdater_release/release.json', 'w') as f:
+    #     dump(release_json, f, indent = 4)
 
 
     with open('dgupdaterconf.json', 'r') as f:
@@ -68,6 +68,3 @@ def commit_changes() -> None:
 
     with open(join(getcwd(), 'dgupdater_release', 'dgupdaterconf.json'), 'w') as f:
         dump(dgupdaterconf_json, f, indent = 4)
-
-if __name__ == "__main__":
-    commit_changes()

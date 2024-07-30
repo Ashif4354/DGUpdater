@@ -42,21 +42,3 @@ def get_ignore_list() -> list:
             return [line.split('\n')[0] for line in file.readlines()]
     except FileNotFoundError as _:
         return []
-
-if __name__ == "__main__":
-    print(get_ignore_list())
-    find_files()
-    
-
-
-    # for file in find_files():
-    #     print(file)
-
-    # print(normpath('D:\\PROGRAMMING\\PROJECTS\\dgupdater'))
-
-    # print(getsize('D:\PROGRAMMING\PROJECTS\dgupdater\dgupdaterconf.json'))
-    # print(getsize('ashif'))
-
-
-        
-        

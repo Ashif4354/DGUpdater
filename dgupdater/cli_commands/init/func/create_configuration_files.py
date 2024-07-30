@@ -31,8 +31,3 @@ def create_configuration_files(data: dict, app_name: str, mongodbstrd: str) -> N
 
     with open('.dgupdaterignore', 'w') as f:
         f.write('')
-
-
-
-if __name__ == "__main__":
-    create_configuration_files({}, 'ashif')
