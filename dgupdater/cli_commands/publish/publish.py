@@ -12,7 +12,6 @@ def publish() -> None:
     if prompt("Are you sure you want to publish the changes? (y/n)").lower() in ["y", "yes"]:
 
         publish_changes()
-
         return
     
     echo("Aborted publishing changes.")
