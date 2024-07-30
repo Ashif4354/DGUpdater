@@ -100,11 +100,13 @@ check_update()
     1. It will try to locate the 'dgupdaterconf.json' file. and the location where the file is found will be considered as the root directory of the application.
     2. Then it will check if a new update is available in the db or not
     3. Then it will ask the user if they want to update the application or not.
-    4. If the user confirms, it will start the updation process, and close the curretnt window.
+    4. If the user confirms, it will start the updation process, and close the current window.
     5. Then it will download all the chunks from the database and merge them to create the new release files.
     6. Then it will replace the old files with the new files.
     7. It will also delete any old version files which are not present in the new version.
     8. The application is now updated to the new version.
     9. The user needs to restart the application to see the changes.
+
+    
 
     

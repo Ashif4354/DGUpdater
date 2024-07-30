@@ -72,6 +72,3 @@ def update(root: str) -> None:
         pass
     
     acknowledge_update_to_client()
-
-if __name__ == "__main__":
-    update()

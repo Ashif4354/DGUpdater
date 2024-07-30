@@ -62,8 +62,5 @@ def init(name: str, mongodbstrd: str, mongodbstrc: str) -> None:
 
     create_configuration_files(dgupdaterconf_json, name, mongodbstrd)
 
-    echo("Initialization Successful.")    
-        
-if __name__ == "__main__":
-    init()
+    echo("Initialization Successful.")
     

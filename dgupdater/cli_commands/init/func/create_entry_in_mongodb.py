@@ -15,7 +15,3 @@ def create_entry_in_mongodb(dgupdaterconf_json: dict[str:any], mongodbstrd: str,
             collection.insert_one(dgupdaterconf_json)
     except Exception as _:
         raise UsageError("Error while creating entry in MongoDB: ")
-
-
-if __name__ == "__main__":
-    raise UsageError("This file is not meant to be executed directly.")
