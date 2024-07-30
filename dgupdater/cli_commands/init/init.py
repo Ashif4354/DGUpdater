@@ -5,7 +5,7 @@ from .func.check_app_exists import check_app_exists
 from .func.create_entry_in_mongodb import create_entry_in_mongodb
 from .func.create_configuration_files import create_configuration_files
 
-arguments = {
+parameters = {
     'name': {
         'prompt': "Name of the Application",
         'help': "The name of the Application. It should be unique for every app "
@@ -36,9 +36,9 @@ dgupdaterconf_json = {
 
 
 @command()
-@option("--name", "-n", required = True, prompt = arguments["name"]["prompt"], help = arguments["name"]["help"])  
-@option("--mongodbstrd", "-md", callback = check_mongo_string, required = True, prompt = arguments["mongodb_connection_string_write"]["prompt"], help = arguments["mongodb_connection_string_write"]["help"])
-@option("--mongodbstrc", "-mc", callback = check_mongo_string, required = True, prompt = arguments["mongodb_connection_string_read"]["prompt"], help = arguments["mongodb_connection_string_read"]["help"])
+@option("--name", "-n", required = True, prompt = parameters["name"]["prompt"], help = parameters["name"]["help"])  
+@option("--mongodbstrd", "-md", callback = check_mongo_string, required = True, prompt = parameters["mongodb_connection_string_write"]["prompt"], help = parameters["mongodb_connection_string_write"]["help"])
+@option("--mongodbstrc", "-mc", callback = check_mongo_string, required = True, prompt = parameters["mongodb_connection_string_read"]["prompt"], help = parameters["mongodb_connection_string_read"]["help"])
 def init(name: str, mongodbstrd: str, mongodbstrc: str) -> None:
     # print(name, version, mongodbstrd, mongodbstrc)    
 

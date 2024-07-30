@@ -14,7 +14,7 @@ def publish_changes()-> None:
     app_name = dgupdaterconf_json['app_name']
     to_be_pushed = []
     
-    with tqdm(total = dgupdaterconf_json['no_of_chunks'], desc = "Loading chunks") as pbar: # progres bar
+    with tqdm(total = dgupdaterconf_json['no_of_chunks'], desc = "Loading chunks", ncols=110, unit='chunks') as pbar: # progres bar
         for i in range(1, dgupdaterconf_json['no_of_chunks'] + 1):
             try:
                 with open(join(getcwd(), 'dgupdater_release', 'chunks', f'{app_name}_part{i}.json'), "r") as f:
@@ -52,7 +52,7 @@ def get_mongodb_connection_string_write(app_name: str)-> str:
     
 
 def mongodb_push(connection_string: str, conf: dict, app_name: str, data: list)-> None:
-    echo('Uploading files to the database...')
+    echo('\nUploading files to the database...\n')
 
     with MongoClient(connection_string) as client:
         db = client['DGUPDATER']
@@ -66,7 +66,11 @@ def mongodb_push(connection_string: str, conf: dict, app_name: str, data: list)-
             raise UsageError("An error occured while deleting the previous version files. Try again.")
 
         try:
-            collection.insert_many(data)
+            with tqdm(total = len(data), desc = "Uploading chunks", ncols=110, unit='chunks') as pbar:
+                for chunk in data:
+                    collection.insert_one(chunk)
+                    pbar.update(1)
+
         except Exception as _:
             raise UsageError("An error occured while pushing the chunks. Try again.")
         
