@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="dgupdater",
-    version="1.0.0",
+    version="1.0.1",
     author="DarkGlance",
     author_email="darkglance.developer@gmail.com",
     description="A NO/LOW Code CLI based auto updation assistant tool for python applications",
