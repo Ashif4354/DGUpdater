@@ -20,17 +20,36 @@ The user with write access will be used by the developer to write data to the da
 * When initializing the application, it will ask two connection strings, one with write access and one with read access.
  So replace the username and password in the connection string with the username and password of the user with write and read access respectively.
 
+## Installation
+You can install this package from pypi 
+
+* Using PIP
+```
+pip install dgupdater
+```
+
+* Using Poetry
+```
+poetry add dgupdater
+```
+* Manually
+```
+git clone https://github.com/Ashif4354/DGUpdater.git
+cd dgupdater
+pip install .
+```
+
 ## Initialization
 You have to open a terminal and navigate into the directory which you want to initialize for auto updation. Then run the following command:
 
-```bash
+```
 dgupdater init
 ```
 
 * This will ask you for the application name, mongodb connection string with read access, mongodb connection string with write access. After providing the required information, it will create a file named 'dgupdaterconf.json' in the current directory. This file will be used to store the configuration of the application.
 
 * The mongodbconnection string with write access will be stored in a different place as follows
-```bash
+```
 Windows: C:/Users/<username>/AppData/local/DarkGlance/dgupdater/dgupdaterconf.json
 Linux: /home/<username>/.config/DarkGlance/dgupdater/dgupdaterconf.json
 Mac: Users/<username>/Library/Application Support/DarkGlance/dgupdater/dgupdaterconf.json
@@ -49,7 +68,7 @@ this file works just like the '.gitignore' file. you can add the files and direc
 
 * After making the changes in the application, you can commit the changes by running the following command:
 
-```bash
+```
 dgupdater commit
 ```
 
@@ -71,7 +90,7 @@ dgupdater commit
 
 * After commiting the changes, you can publish the application by running the following command:
 
-```bash
+```
 dgupdater publish
 ```
 
