@@ -1,4 +1,5 @@
-from os import system
+from subprocess import Popen, CREATE_NEW_CONSOLE
+from sys import exit
 
 from .func.find_root_directory import find_root_directory
 from .func.check_update_from_db import check_update_from_db
@@ -19,9 +20,17 @@ def check_update() -> None:
         return
     
     # Update the application
+    # system(f'dgupdater update -r "{root_dir}"') # type: ignore
 
-    # system('dgupdater update -r ' + root_dir + ' -n ' + str(data['no_of_chunks'])) # type: ignore
-    system(f'dgupdater update -r "{root_dir}"') # type: ignore
+    Popen(
+        [
+            'dgupdater',
+            'update',
+            '-r',
+            root_dir
+        ],
+        creationflags=CREATE_NEW_CONSOLE
+    )
     exit()
     
 if __name__ == '__main__':
