@@ -8,7 +8,7 @@ from .func.ask_to_be_updated import ask_to_be_updated
 def check_update() -> None:
     try:
         root_dir = find_root_directory()
-    except FileNotFoundError as e:
+    except FileNotFoundError as _:
         print("'dgupdaterconf.json' file not found, cant check for new updates. But you can still use the application.")
         return
     
