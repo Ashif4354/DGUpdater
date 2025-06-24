@@ -10,5 +10,3 @@ def acknowledge_update_to_client() -> None:
 
     input("\nPress Enter to continue...")  # Wait for user input before closing the console
 
-
-acknowledge_update_to_client()
