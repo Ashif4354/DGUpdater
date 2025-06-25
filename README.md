@@ -65,7 +65,7 @@ Windows: C:/Users/<username>/AppData/local/DarkGlance/dgupdater/dgupdaterconf.js
 * It will also create a file named `.dgupdaterignore` in the current directory.
 This file works just like the `.gitignore` file. You can add the files and directories which you want to ignore while updating the application.
 
-* It will also create a file named `update.exe` in the current directory. This file is used to update the application. It should not be deleted
+* It will also create a file named `dgupdaterupdate.exe` in the current directory. This file is used to update the application. It should not be deleted, and it should be shipped with the application.
 
 * If you want to change the MongoDB connection string, you can do it by running `dgupdater init` again and providing the new connection string.
 
@@ -114,7 +114,7 @@ dgupdater publish
 
 ## check_update()
 
-* You need to call `check_update()` in the entry point of the application or wherever you seem fit to call it, to check for the new updates.
+* You need to call `check_update()` in the entry point of the application before anything starts in your application or wherever you seem fit to call it, to check for the new updates.
 ```python
 from dgupdater import check_update
 
@@ -132,6 +132,9 @@ check_update()
     7. It will also delete any old version files which are not present in the new version.
     8. The application is now updated to the new version.
     9. The user needs to restart the application to see the changes.
+
+## Shipping Instructions
+* You need to ship the `dgupdaterupdate.exe` and `dgupdaterconf.json` file along with the application.
 
 
 ## 🏁 Conclusion
