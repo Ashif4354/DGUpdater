@@ -8,5 +8,8 @@ def acknowledge_update_to_client() -> None:
     print('✅✅  🙌 In Tamil: "Update Mudinjiduchu da. App-a restart pannu". 🙌                    ✅✅')
     print("✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅")
 
-    input("\nPress Enter to continue...")  # Wait for user input before closing the console
+    input("\nPress Enter or close this window to continue...")
 
+
+if __name__ == "__main__":
+    acknowledge_update_to_client()

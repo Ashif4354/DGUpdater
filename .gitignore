@@ -3,7 +3,6 @@ plan.txt
 notes.txt
 .dgupdaterignore
 .env
-*.exe
 
 # Virtual Environments
 venv/

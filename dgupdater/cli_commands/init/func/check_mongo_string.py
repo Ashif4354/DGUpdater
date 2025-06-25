@@ -1,7 +1,6 @@
 from pymongo import MongoClient
 from pymongo.errors import ConnectionFailure
 from click import BadParameter, UsageError, echo
-from json import loads
 
 def check_mongo_string(ctx, param, value: str) -> str|None:
 
@@ -25,5 +24,4 @@ def check_mongo_string(ctx, param, value: str) -> str|None:
         echo()
         raise BadParameter("Enter a Valid MongoDB Connection String")
     except Exception as e:
-        raise UsageError("Some error occured. Try again." + str(e))
-        
+        raise UsageError("Some error occurred. Try again." + str(e))

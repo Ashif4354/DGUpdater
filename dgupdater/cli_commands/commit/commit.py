@@ -4,9 +4,16 @@ from .func.check_configuration_files_exists import check_configuration_files_exi
 from .func.update_version import update_version
 from .func.commit_changes import commit_changes
 from ..publish.func.publish_changes import publish_changes
+from .func.validate_version import validate_version
 
 @command()
-@option('--version', '-v', required = True, prompt = 'New version number', help='New version number of the application')
+@option(
+    '--version', '-v', 
+    required = True, 
+    prompt = 'New version number', 
+    help='New version number of the application',
+    callback=validate_version
+)
 def commit(version: str) -> None:   
 
     check_configuration_files_exists()
