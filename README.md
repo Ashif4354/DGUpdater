@@ -8,7 +8,10 @@
 DGUPDATER is a command line tool which helps developers to update their python applications automatically. It is a simple tool which can be used to update the application without the need of re-downloading the whole application. It is very useful when you have a large application and you want to update only a small part of the application. 
 
 ***Note: This tools is only for releasing new updates by the developer and updating the application to the newer version by the client.***
+
 ***This tool is not for creating the application or exporting the application. You have to do that yourself.***
+
+***Sometimes you or the user of your application may need to disable antivirus or windows defender to run the application.***
 
 ## Requirements for using dgupdater
 
