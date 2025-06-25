@@ -34,7 +34,7 @@ def create_configuration_files(data: dict, app_name: str, mongodbstrd: str) -> N
     with open('.dgupdaterignore', 'w') as f:
         f.write('.dgupdaterignore\nupdate.exe')
 
-    with package_path("dgupdater.bin") as bin_path:
-        copyfile(join(bin_path, "update.exe"), "update.exe")
+    with package_path("dgupdater") as bin_path:
+        copyfile(join(bin_path, "bin", "update.exe"), "update.exe")
 
     
