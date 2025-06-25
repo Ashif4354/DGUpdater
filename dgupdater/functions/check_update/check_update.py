@@ -1,5 +1,8 @@
 from subprocess import Popen, CREATE_NEW_CONSOLE
 from sys import exit
+from os.path import join
+from tempfile import gettempdir
+from shutil import copyfile
 
 from .func.find_root_directory import find_root_directory
 from .func.check_update_from_db import check_update_from_db
@@ -20,15 +23,18 @@ def check_update() -> None:
         return
     
     # Update the application
-    # system(f'dgupdater update -r "{root_dir}"') # type: ignore
+
+    temp_dir = gettempdir()
+    temp_file = join(temp_dir, 'dgupdaterupdate.exe')
+    copyfile(join(root_dir, 'dgupdaterupdate.exe'), temp_file)
 
     Popen(
         [
-            'dgupdater',
-            'update',
+            temp_file,
             '-r',
-            root_dir
+            root_dir,
         ],
+        cwd=root_dir,
         creationflags=CREATE_NEW_CONSOLE
     )
     exit()

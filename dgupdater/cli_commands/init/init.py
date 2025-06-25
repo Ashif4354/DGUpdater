@@ -40,9 +40,8 @@ dgupdaterconf_json = {
 @option("--mongodbstrd", "-md", callback = check_mongo_string, required = True, prompt = parameters["mongodb_connection_string_write"]["prompt"], help = parameters["mongodb_connection_string_write"]["help"])
 @option("--mongodbstrc", "-mc", callback = check_mongo_string, required = True, prompt = parameters["mongodb_connection_string_read"]["prompt"], help = parameters["mongodb_connection_string_read"]["help"])
 def init(name: str, mongodbstrd: str, mongodbstrc: str) -> None:
-    # print(name, version, mongodbstrd, mongodbstrc)    
 
-    echo("\nInitializing this directory for autoupdation...")
+    echo("\nInitializing this directory for auto updation...")
 
     app_exists, over_write = check_app_exists(name, mongodbstrd)
 

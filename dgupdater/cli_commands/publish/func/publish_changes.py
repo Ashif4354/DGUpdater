@@ -14,7 +14,7 @@ def publish_changes()-> None:
     app_name = dgupdaterconf_json['app_name']
     to_be_pushed = []
     
-    with tqdm(total = dgupdaterconf_json['no_of_chunks'], desc = "Loading chunks", ncols=110, unit='chunks') as pbar: # progres bar
+    with tqdm(total = dgupdaterconf_json['no_of_chunks'], desc = "Loading chunks", ncols=110, unit='chunks') as pbar: # progress bar
         for i in range(1, dgupdaterconf_json['no_of_chunks'] + 1):
             try:
                 with open(join(getcwd(), 'dgupdater_release', 'chunks', f'{app_name}_part{i}.json'), "r") as f:
@@ -47,7 +47,7 @@ def get_mongodb_connection_string_write(app_name: str)-> str:
         with open(join(user_data_dir("dgupdater", "DarkGlance"), 'dgupdaterconf.json'), "r") as f:
             return load(f)['mongodbstrds'][app_name]
     except (FileNotFoundError, KeyError) as _:
-        error_message = "An error occured while getting the mongodb write string. Initialize the directory and commit the changes again."   
+        error_message = "An error occurred while getting the mongodb write string. Initialize the directory and commit the changes again."   
         raise UsageError(error_message)
     
 
@@ -63,7 +63,7 @@ def mongodb_push(connection_string: str, conf: dict, app_name: str, data: list)-
         try:
             collection.delete_many({'obj_type': 'chunk'})
         except Exception as _:
-            raise UsageError("An error occured while deleting the previous version files. Try again.")
+            raise UsageError("An error occurred while deleting the previous version files. Try again.")
 
         try:
             with tqdm(total = len(data), desc = "Uploading chunks", ncols=110, unit='chunks') as pbar:
@@ -72,7 +72,7 @@ def mongodb_push(connection_string: str, conf: dict, app_name: str, data: list)-
                     pbar.update(1)
 
         except Exception as _:
-            raise UsageError("An error occured while pushing the chunks. Try again.")
+            raise UsageError("An error occurred while pushing the chunks. Try again.")
         
         echo('\nFiles uploaded successfully...')
         
@@ -83,7 +83,7 @@ def make_update_ready(collection: any, app_name: str)-> None:
     try:
         collection.update_one({'_id':f'{app_name}_config'}, {'$set': {'update_ready': True}})
     except Exception as _:
-        raise UsageError("An error occured while making the update ready. Try publishing again.")
+        raise UsageError("An error occurred while making the update ready. Try publishing again.")
 
 
 if __name__ == '__main__':

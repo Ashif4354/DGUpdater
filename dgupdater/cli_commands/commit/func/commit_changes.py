@@ -21,7 +21,6 @@ def commit_changes() -> None:
     release_json = {}
 
     release_files = find_files()
-    # print(release_files)
 
     with open('dgupdaterconf.json', 'r') as f:
         dgupdaterconf_json = load(f)
@@ -39,7 +38,6 @@ def commit_changes() -> None:
 
             try:
                 with open(file_path, 'r') as f:
-                    # print(file_path)
                     release_json[file] = f.read()
 
             except UnicodeDecodeError as _:
@@ -53,10 +51,6 @@ def commit_changes() -> None:
     echo() # empty line
 
     release_json_str = dumps(release_json)
-
-    # with open('dgupdater_release/release.json', 'w') as f:
-    #     dump(release_json, f, indent = 4)
-
 
     with open('dgupdaterconf.json', 'r') as f:
         dgupdaterconf_json = load(f)

@@ -4,13 +4,14 @@ from tqdm import tqdm
 from pymongo import MongoClient
 from os.path import join, normpath, dirname
 from os import makedirs
+from sys import exit
 from base64 import b64decode
 
 from .func.delete_deprecated_files import delete_deprecated_files
 from .func.acknowledge_update_to_client import acknowledge_update_to_client
 
 @command()
-@option("--root", '-r', required = True, prompt = 'rootdir', help = "Root directory of the application")
+@option("--root", '-r', required=True, prompt = 'rootdir', help = "Root directory of the application")
 def update(root: str) -> None:
 
     echo("\nUpdating...\n")
@@ -23,7 +24,7 @@ def update(root: str) -> None:
         return
     
     mongodbstrc = conf['mongodb_connection_string_client']
-    app_name = conf['app_name']
+    app_name = conf['app_name'] 
     
     new_files_json_string = ''
 
@@ -70,5 +71,8 @@ def update(root: str) -> None:
         delete_deprecated_files(root, conf['files_in_latest_version'], new_update_conf['files_in_latest_version'])
     except KeyError as _:
         pass
-    
+
     acknowledge_update_to_client()
+
+    exit()
+

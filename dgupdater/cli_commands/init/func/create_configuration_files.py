@@ -3,6 +3,8 @@ from json.decoder import JSONDecodeError
 from os import makedirs
 from os.path import join, exists
 from platformdirs import user_data_dir
+from importlib.resources import path as package_path
+from shutil import copyfile
 
 def create_configuration_files(data: dict, app_name: str, mongodbstrd: str) -> None:
     with open("dgupdaterconf.json", "w") as f:
@@ -30,4 +32,9 @@ def create_configuration_files(data: dict, app_name: str, mongodbstrd: str) -> N
         dump(dgupdaterconf_json, f, indent = 4)
 
     with open('.dgupdaterignore', 'w') as f:
-        f.write('')
+        f.write('.dgupdaterignore\nupdate.exe')
+
+    with package_path("dgupdater.bin") as bin_path:
+        copyfile(join(bin_path, "update.exe"), "update.exe")
+
+    
