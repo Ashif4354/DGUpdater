@@ -1,8 +1,15 @@
-from subprocess import Popen, CREATE_NEW_CONSOLE
+from subprocess import Popen
 from sys import exit
 from os.path import join
 from tempfile import gettempdir
 from shutil import copyfile
+import platform
+
+# CREATE_NEW_CONSOLE is Windows-specific
+try:
+    from subprocess import CREATE_NEW_CONSOLE
+except ImportError:
+    CREATE_NEW_CONSOLE = None
 
 from .func.find_root_directory import find_root_directory
 from .func.check_update_from_db import check_update_from_db
@@ -28,15 +35,27 @@ def check_update() -> None:
     temp_file = join(temp_dir, 'dgupdaterupdate.exe')
     copyfile(join(root_dir, 'dgupdaterupdate.exe'), temp_file)
 
-    Popen(
-        [
-            temp_file,
-            '-r',
-            root_dir,
-        ],
-        cwd=root_dir,
-        creationflags=CREATE_NEW_CONSOLE
-    )
+    # Platform-specific process creation
+    if platform.system().lower() == 'windows' and CREATE_NEW_CONSOLE is not None:
+        Popen(
+            [
+                temp_file,
+                '-r',
+                root_dir,
+            ],
+            cwd=root_dir,
+            creationflags=CREATE_NEW_CONSOLE
+        )
+    else:
+        # For non-Windows platforms or when CREATE_NEW_CONSOLE is not available
+        Popen(
+            [
+                temp_file,
+                '-r',
+                root_dir,
+            ],
+            cwd=root_dir
+        )
     exit()
     
 if __name__ == '__main__':
