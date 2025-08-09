@@ -15,9 +15,11 @@ setup(
         'Development Status :: 5 - Production/Stable',
         'Programming Language :: Python :: 3.12',
         'License :: OSI Approved :: MIT License',
+        'Operating System :: OS Independent',
         'Operating System :: Microsoft :: Windows',
+        'Operating System :: POSIX :: Linux',
+        'Operating System :: MacOS',
         'Environment :: Console',
-        'Environment :: Win32 (MS Windows)',
         'Topic :: Utilities',
         'Topic :: Software Development :: Libraries :: Python Modules'
     ],
@@ -31,7 +33,8 @@ setup(
 
     ],
     package_data={
-        'dgupdater': ["bin/update.exe"]
+        'dgupdater': ["bin/dgupdaterupdate.exe"],
+        '': ['update.py']
     },
     include_package_data=True,
     entry_points={

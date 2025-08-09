@@ -1,1 +1,2 @@
 include dgupdater/bin/*
+include update.py

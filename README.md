@@ -1,5 +1,4 @@
 # DGUPDATER
-⚠️ This tool is currently supported only on **Windows OS** due to its reliance on native `.exe` files bundled within the package.
 
 ## Introduction
 
@@ -58,9 +57,11 @@ dgupdater init
 
 * This will ask you for the application name, MongoDB connection string with read access, MongoDB connection string with write access. After providing the required information, it will create a file named `dgupdaterconf.json` in the current directory. This file will be used to store the configuration of the application.
 
-* The mongodbconnection string with write access will be stored in a different place as follows
+* The mongodbconnection string with write access will be stored in a different place as follows:
 ```
 Windows: C:/Users/<username>/AppData/local/DarkGlance/dgupdater/dgupdaterconf.json
+Linux: ~/.local/share/dgupdater/dgupdaterconf.json
+Mac OS: ~/Library/Application Support/dgupdater/dgupdaterconf.json
 ```
 
 * Then it will check if the application is already registered in the database or not. If it is not registered, it will register the     application in the database. or it will ask whether to overwrite the application details.
@@ -68,7 +69,7 @@ Windows: C:/Users/<username>/AppData/local/DarkGlance/dgupdater/dgupdaterconf.js
 * It will also create a file named `.dgupdaterignore` in the current directory.
 This file works just like the `.gitignore` file. You can add the files and directories which you want to ignore while updating the application.
 
-* It will also create a file named `dgupdaterupdate.exe` in the current directory. This file is used to update the application. It should not be deleted, and it should be shipped with the application.
+* It will also create a file named `dgupdaterupdate.exe` (on Windows) or `update.py` (on Linux/Mac) in the current directory. This file is used to update the application. It should not be deleted, and it should be shipped with the application.
 
 * If you want to change the MongoDB connection string, you can do it by running `dgupdater init` again and providing the new connection string.
 
@@ -137,7 +138,7 @@ check_update()
     9. The user needs to restart the application to see the changes.
 
 ## Shipping Instructions
-* You need to ship the `dgupdaterupdate.exe` and `dgupdaterconf.json` file along with the application.
+* You need to ship the updater file (`dgupdaterupdate.exe` on Windows or `update.py` on Linux/Mac) and `dgupdaterconf.json` file along with the application.
 
 
 ## 🏁 Conclusion

@@ -5,6 +5,7 @@ from os.path import join, exists
 from platformdirs import user_data_dir
 from importlib.resources import path as package_path
 from shutil import copyfile
+import platform
 
 def create_configuration_files(data: dict, app_name: str, mongodbstrd: str) -> None:
     with open("dgupdaterconf.json", "w") as f:
@@ -32,9 +33,38 @@ def create_configuration_files(data: dict, app_name: str, mongodbstrd: str) -> N
         dump(dgupdaterconf_json, f, indent = 4)
 
     with open('.dgupdaterignore', 'w') as f:
-        f.write('.dgupdaterignore\nupdate.exe')
+        if platform.system() == "Windows":
+            f.write('.dgupdaterignore\nupdate.exe\ndgupdaterupdate.exe')
+        else:
+            f.write('.dgupdaterignore\nupdate.py')
 
-    with package_path("dgupdater") as bin_path:
-        copyfile(join(bin_path, "bin", "dgupdaterupdate.exe"), "dgupdaterupdate.exe")
+    # Copy the appropriate updater file based on platform
+    if platform.system() == "Windows":
+        # For Windows, copy the exe if available
+        try:
+            with package_path("dgupdater") as bin_path:
+                copyfile(join(bin_path, "bin", "dgupdaterupdate.exe"), "dgupdaterupdate.exe")
+        except FileNotFoundError:
+            # Fallback: copy the Python script
+            try:
+                # Try to find update.py in the package
+                import pkg_resources
+                update_script_path = pkg_resources.resource_filename('dgupdater', '../update.py')
+                copyfile(update_script_path, "update.py")
+            except:
+                # Final fallback - create a minimal update.py
+                with open("update.py", "w") as f:
+                    f.write("from dgupdater.cli_commands.update.update import update\nupdate()")
+    else:
+        # For Unix-like systems, copy the Python script or create it
+        try:
+            # Try to find update.py in the package
+            import pkg_resources
+            update_script_path = pkg_resources.resource_filename('dgupdater', '../update.py')
+            copyfile(update_script_path, "update.py")
+        except:
+            # Fallback - create a minimal update.py
+            with open("update.py", "w") as f:
+                f.write("from dgupdater.cli_commands.update.update import update\nupdate()")
 
     
