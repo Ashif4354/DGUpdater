@@ -1,5 +1,7 @@
 from subprocess import Popen, CREATE_NEW_CONSOLE
-from sys import exit
+# from sys import exit
+from signal import SIGTERM
+from os import getpid, kill
 from os.path import join
 from tempfile import gettempdir
 from shutil import copyfile
@@ -37,7 +39,9 @@ def check_update() -> None:
         cwd=root_dir,
         creationflags=CREATE_NEW_CONSOLE
     )
-    exit()
+    # exit()
+
+    kill(getpid(), SIGTERM)
     
 if __name__ == '__main__':
     check_update()
