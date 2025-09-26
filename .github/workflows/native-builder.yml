@@ -65,7 +65,7 @@ jobs:
           if exist dgupdaterupdate.spec (
             pyinstaller dgupdaterupdate.spec
           ) else (
-            pyinstaller --onefile updater.py
+            pyinstaller --onefile dgupdaterupdate.py
           )
 
           REM If single exe produced: move it into a zip for consistent artifact
