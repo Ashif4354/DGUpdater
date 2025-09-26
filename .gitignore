@@ -17,6 +17,7 @@ dgupdater.egg-info/
 dist/
 build/
 dgupdater_release/
+output/
 
 # Pycache
 *.pyc

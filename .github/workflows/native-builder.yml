@@ -1,0 +1,90 @@
+name: Build PyInstaller binaries and upload artifacts
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - native-builder
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        python: ['3.11']
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python }}
+
+      - name: Install requirements
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyinstaller
+        shell: bash
+
+      - name: Build with PyInstaller (Linux / macOS)
+        if: runner.os != 'Windows'
+        run: |
+          # Ensure old build artifacts are removed
+          rm -rf build dist || true
+
+          # If you have a spec file at repo root, use it. Otherwise fallback to a simple onefile build.
+          if [ -f dgupdaterupdate.spec ]; then
+            pyinstaller dgupdaterupdate.spec
+          else
+            pyinstaller --onefile updater.py
+          fi
+
+          # If PyInstaller produced a .app directory on macOS, zip it for upload
+          if [ -d "dist/YourApp.app" ]; then
+            cd dist
+            zip -r ../artifact-${{ matrix.os }}.zip YourApp.app
+            cd ..
+          else
+            # create a portable zip with everything in dist
+            cd dist || exit 0
+            zip -r ../artifact-${{ matrix.os }}.zip ./*
+            cd ..
+          fi
+        shell: bash
+
+      - name: Build with PyInstaller (Windows)
+        if: runner.os == 'Windows'
+        run: |
+          rmdir /s /q build || echo nothing
+          rmdir /s /q dist || echo nothing
+
+          if exist dgupdaterupdate.spec (
+            pyinstaller dgupdaterupdate.spec
+          ) else (
+            pyinstaller --onefile updater.py
+          )
+
+          REM If single exe produced: move it into a zip for consistent artifact
+          powershell -Command "
+            $dist = Get-ChildItem -Path dist -File -Recurse | Where-Object { $_.Extension -ne '.spec' } | Select-Object -First 1;
+            if ($dist) {
+              Compress-Archive -Path dist\\* -DestinationPath artifact-${{ matrix.os }}.zip -Force
+            } else {
+              Write-Host 'No dist output found'
+            }
+          "
+        shell: cmd
+
+      - name: Upload build artifact
+        # if you made artifact-<os>.zip then upload that; else upload contents of dist/
+        uses: actions/upload-artifact@v4
+        with:
+          name: dgupdater-${{ matrix.os }}
+          path: |
+            artifact-${{ matrix.os }}.zip
+            dist/**
+          retention-days: 7

@@ -31,7 +31,7 @@ setup(
 
     ],
     package_data={
-        'dgupdater': ["bin/update.exe"]
+        'dgupdater': ["bin/dgupdaterupdate.exe"]
     },
     include_package_data=True,
     entry_points={
