@@ -16,8 +16,12 @@ setup(
         'Programming Language :: Python :: 3.12',
         'License :: OSI Approved :: MIT License',
         'Operating System :: Microsoft :: Windows',
+        'Operating System :: Unix',
+        'Operating System :: MacOS',
         'Environment :: Console',
         'Environment :: Win32 (MS Windows)',
+        'Environment :: MacOS X',
+        'Environment :: Unix',        
         'Topic :: Utilities',
         'Topic :: Software Development :: Libraries :: Python Modules'
     ],

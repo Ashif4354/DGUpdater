@@ -1,5 +1,5 @@
 # DGUPDATER
-⚠️ This tool is currently supported only on **Windows OS** due to its reliance on native `.exe` files bundled within the package.
+
 
 ## Introduction
 
