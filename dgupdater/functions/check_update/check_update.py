@@ -1,14 +1,12 @@
 from os import _exit
-from os.path import join
 from platform import system
-from tempfile import gettempdir
 from threading import Thread
-from shutil import copyfile
 
 from .func.find_root_directory import find_root_directory
 from .func.check_update_from_db import check_update_from_db
 from .func.ask_to_be_updated import ask_to_be_updated
 from .func.open_updater import open_updater
+from .func.get_temp_file import get_temp_file
 
 def check_update(parallel: bool = False) -> None:
     def _check_update() -> None:
@@ -29,10 +27,7 @@ def check_update(parallel: bool = False) -> None:
             return
         
         # Update the application
-
-        temp_dir = gettempdir()
-        temp_file = join(temp_dir, 'dgupdaterupdate.exe')
-        copyfile(join(root_dir, 'dgupdaterupdate.exe'), temp_file)
+        temp_file = get_temp_file(root_dir, this_os)
 
         open_updater(temp_file, root_dir, this_os)
 

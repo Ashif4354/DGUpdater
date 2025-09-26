@@ -31,7 +31,11 @@ setup(
 
     ],
     package_data={
-        'dgupdater': ["bin/dgupdaterupdate.exe"]
+        'dgupdater': [
+            "bin/macos/dgupdaterupdate",
+            "bin/linux/dgupdaterupdate",
+            "bin/windows/dgupdaterupdate.exe"            
+        ]
     },
     include_package_data=True,
     entry_points={

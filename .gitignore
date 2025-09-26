@@ -18,6 +18,7 @@ dist/
 build/
 dgupdater_release/
 output/
+native-builds/
 
 # Pycache
 *.pyc

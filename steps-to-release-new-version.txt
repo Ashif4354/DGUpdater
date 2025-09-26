@@ -1,7 +1,0 @@
-1. Update the version number in setup.py
-2. Run build-update-exe.bat
-3. Commit and push to GitHub (always in v1 branch)
-4. Create a PR from v1 to main
-5. Merge the PR
-6. Create a new release on GitHub with the tag vX.X.X (where X is the new version number) and title same as the tag
-7. GitHub actions will automatically build the new version and upload it to pypi.

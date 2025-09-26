@@ -5,6 +5,7 @@ from os.path import join, exists
 from platformdirs import user_data_dir
 from importlib.resources import path as package_path
 from shutil import copyfile
+from platform import system
 
 def create_configuration_files(data: dict, app_name: str, mongodbstrd: str) -> None:
     with open("dgupdaterconf.json", "w") as f:
@@ -32,9 +33,20 @@ def create_configuration_files(data: dict, app_name: str, mongodbstrd: str) -> N
         dump(dgupdaterconf_json, f, indent = 4)
 
     with open('.dgupdaterignore', 'w') as f:
-        f.write('.dgupdaterignore\ndgupdaterupdate.exe')
+        f.write('.dgupdaterignore\ndgupdaterupdate.exe\ndgupdaterupdate')
+    
+    this_os = system()
 
-    with package_path("dgupdater") as bin_path:
-        copyfile(join(bin_path, "bin", "dgupdaterupdate.exe"), "dgupdaterupdate.exe")
+    if this_os == "Windows":
+        with package_path("dgupdater") as bin_path:
+            copyfile(join(bin_path, "bin", "windows", "dgupdaterupdate.exe"), "dgupdaterupdate.exe")
+    
+    elif this_os == "Linux":
+        with package_path("dgupdater") as bin_path:
+            copyfile(join(bin_path, "bin", "linux", "dgupdaterupdate"), "dgupdaterupdate")
+
+    elif this_os == "Darwin":
+        with package_path("dgupdater") as bin_path:
+            copyfile(join(bin_path, "bin", "macos", "dgupdaterupdate"), "dgupdaterupdate")
 
     
