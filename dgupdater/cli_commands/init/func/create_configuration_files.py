@@ -1,3 +1,4 @@
+import contextlib
 from json import dump, load
 from json.decoder import JSONDecodeError
 from os import makedirs
@@ -19,28 +20,26 @@ def create_configuration_files(data: dict, app_name: str, mongodbstrd: str) -> N
     }
 
     file = join(dgupdater_dir, "dgupdaterconf.json")
-    
-    try:
+
+    with contextlib.suppress(JSONDecodeError):
         if exists(file):
             with open(file, 'r') as f:
                 dgupdaterconf_json = load(f)
-    except JSONDecodeError as _:
-        pass
 
     dgupdaterconf_json['mongodbstrds'][app_name] = mongodbstrd    
-    
+
     with open(file, "w") as f:
         dump(dgupdaterconf_json, f, indent = 4)
 
     with open('.dgupdaterignore', 'w') as f:
         f.write('.dgupdaterignore\ndgupdaterupdate.exe\ndgupdaterupdate')
-    
+
     this_os = system()
 
     if this_os == "Windows":
         with package_path("dgupdater") as bin_path:
             copyfile(join(bin_path, "bin", "windows", "dgupdaterupdate.exe"), "dgupdaterupdate.exe")
-    
+
     elif this_os == "Linux":
         with package_path("dgupdater") as bin_path:
             copyfile(join(bin_path, "bin", "linux", "dgupdaterupdate"), "dgupdaterupdate")
@@ -48,5 +47,8 @@ def create_configuration_files(data: dict, app_name: str, mongodbstrd: str) -> N
     elif this_os == "Darwin":
         with package_path("dgupdater") as bin_path:
             copyfile(join(bin_path, "bin", "macos", "dgupdaterupdate"), "dgupdaterupdate")
+
+    else:
+        raise OSError(f'Unsupported OS: {this_os}')
 
     
