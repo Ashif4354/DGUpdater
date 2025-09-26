@@ -1,9 +1,11 @@
 # -*- mode: python ; coding: utf-8 -*-
 
+from pathlib import Path
+ROOT = Path(".").resolve()
 
 a = Analysis(
-    ['D:\\PROGRAMMING\\PROJECTS\\dgupdater\\update.py'],
-    pathex=[],
+    [str(ROOT / "dgupdaterupdate.py")],
+    pathex=[str(ROOT)],
     binaries=[],
     datas=[],
     hiddenimports=[],
@@ -35,5 +37,5 @@ exe = EXE(
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
-    icon=['D:\\PROGRAMMING\\PROJECTS\\dgupdater\\assets\\loading-arrow.ico'],
+    icon=[str(ROOT / "assets" / "loading-arrow.ico")],
 )

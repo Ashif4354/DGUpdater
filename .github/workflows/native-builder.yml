@@ -58,26 +58,30 @@ jobs:
 
       - name: Build with PyInstaller (Windows)
         if: runner.os == 'Windows'
+        shell: pwsh
         run: |
-          rmdir /s /q build || echo nothing
-          rmdir /s /q dist || echo nothing
+          Write-Host ":: Cleaning previous build/dist"
+          Remove-Item -Recurse -Force build, dist -ErrorAction SilentlyContinue
 
-          if exist dgupdaterupdate.spec (
+          Write-Host ":: Running PyInstaller (using spec if present)"
+          if (Test-Path -Path 'dgupdaterupdate.spec') {
             pyinstaller dgupdaterupdate.spec
-          ) else (
-            pyinstaller --onefile updater.py
-          )
+          } else {
+            pyinstaller --onefile dgupdaterupdate.py
+          }
 
-          REM If single exe produced: move it into a zip for consistent artifact
-          powershell -Command "
-            $dist = Get-ChildItem -Path dist -File -Recurse | Where-Object { $_.Extension -ne '.spec' } | Select-Object -First 1;
-            if ($dist) {
-              Compress-Archive -Path dist\\* -DestinationPath artifact-${{ matrix.os }}.zip -Force
-            } else {
-              Write-Host 'No dist output found'
-            }
-          "
-        shell: cmd
+          Write-Host ":: Packaging dist into artifact-${{ matrix.os }}.zip"
+          if (Test-Path -Path 'dist') {
+            # Remove any previous artifact zip
+            if (Test-Path -Path "artifact-${{ matrix.os }}.zip") { Remove-Item -Force "artifact-${{ matrix.os }}.zip" -ErrorAction SilentlyContinue }
+            Compress-Archive -Path "dist\*" -DestinationPath "artifact-${{ matrix.os }}.zip" -Force
+
+            Write-Host "Produced artifact: artifact-${{ matrix.os }}.zip"
+            Get-ChildItem -Path .\dist -Recurse | ForEach-Object { Write-Host "dist: $($_.FullName)" }
+          } else {
+            Write-Warning "No dist directory created by PyInstaller. Check earlier logs."
+            Exit 1
+          }
 
       - name: Upload build artifact
         # if you made artifact-<os>.zip then upload that; else upload contents of dist/
