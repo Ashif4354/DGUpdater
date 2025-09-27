@@ -1,4 +1,4 @@
-import contextlib
+from contextlib import suppress
 from json import dump, load
 from json.decoder import JSONDecodeError
 from os import makedirs
@@ -20,7 +20,7 @@ def create_configuration_files(data: dict, app_name: str, mongodbstrd: str) -> N
 
     file = join(dgupdater_dir, "dgupdaterconf.json")
 
-    with contextlib.suppress(JSONDecodeError):
+    with suppress(JSONDecodeError):
         if exists(file):
             with open(file, 'r') as f:
                 dgupdaterconf_json = load(f)
