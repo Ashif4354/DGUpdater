@@ -24,7 +24,13 @@ def get_version() -> list[int]:
     with open('dgupdaterconf.json', 'r') as f:
         version: str = load(f)['version']
 
-        version = [int(x) for x in version.split(".")]
+        if version == "Version will be updated after publishing the changes.":
+            return [0, 0, 0]
+
+        try:
+            version = [int(x) for x in version.split(".")]
+        except ValueError:
+            raise ValueError("dgupdaterconf.json file seems to be corrupted. Try 'dgupdater init' again.")
 
         if len(version) != 3:
             raise ValueError("dgupdaterconf.json file seems to be corrupted. Try 'dgupdater init' again.")
