@@ -37,3 +37,7 @@ def ask_to_be_updated(this_os: str) -> bool:
     
     else:
         raise OSError(f'Unsupported OS: {this_os}')
+    
+
+if __name__ == '__main__':
+    print(ask_to_be_updated('Darwin'))
