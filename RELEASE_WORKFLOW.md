@@ -47,7 +47,7 @@ Delete any old build artifacts from the `native-builds` directory before downloa
 
 ```bash
 rm -rf native-builds # Linux / macOS
-rmdir /s /q native-buildss # Windows cmd
+rmdir /s /q native-builds # Windows cmd
 Remove-Item -Recurse -Force native-builds -ErrorAction SilentlyContinue # Windows pwsh
 ```
 
@@ -63,7 +63,7 @@ Replace `<run-id>` with the actual ID from the previous step.
 
 ---
 
-### 8. Copy executables into project structure
+### 8. Copy/Replace executables into project structure
 
 Copy the built executables into the appropriate directories under `dgupdater/bin/`.
 
