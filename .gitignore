@@ -6,6 +6,7 @@ notes.txt
 
 # Virtual Environments
 .venv/
+linux-venv
 
 # Tests
 tests/

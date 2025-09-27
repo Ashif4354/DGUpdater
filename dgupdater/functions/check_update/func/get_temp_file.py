@@ -15,7 +15,7 @@ def get_temp_file(root_dir: str, this_os: str) -> str:
 
     elif this_os == 'Windows':
         temp_file = join(temp_dir, 'dgupdaterupdate_win.exe')
-        copyfile(join(root_dir, 'dgupdaterupdate_win.exe'), temp_file)
+        copyfile(join(root_dir, 'dgupdaterupdate', 'dgupdaterupdate_win.exe'), temp_file)
 
     else:
         raise OSError(f'Unsupported OS: {this_os}')
