@@ -5,6 +5,10 @@ def validate_version(ctx, param, value):
 
     try:
         new_version: list[int] = [int(x) for x in value.split(".")]
+
+        if len(new_version) != 3:
+            raise ValueError("Semantic Version should only have 3 parts")
+        
     except ValueError as e:
         raise BadParameter("Enter a Valid Semantic Version") from e
     
@@ -20,4 +24,9 @@ def get_version() -> list[int]:
     with open('dgupdaterconf.json', 'r') as f:
         version: str = load(f)['version']
 
-        return [int(x) for x in version.split(".")]
+        version = [int(x) for x in version.split(".")]
+
+        if len(version) != 3:
+            raise ValueError("dgupdaterconf.json file seems to be corrupted. Try 'dgupdater init' again.")
+
+        return version

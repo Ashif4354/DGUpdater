@@ -1,3 +1,4 @@
+from os import chmod
 from os.path import join
 from tempfile import gettempdir
 from shutil import copyfile
@@ -19,5 +20,7 @@ def get_temp_file(root_dir: str, this_os: str) -> str:
 
     else:
         raise OSError(f'Unsupported OS: {this_os}')
+    
+    chmod(temp_file, 0o755)
 
     return temp_file
