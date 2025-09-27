@@ -1,0 +1,6 @@
+click>=7.0
+pymongo
+platformdirs
+tqdm
+rich
+pyinstaller

@@ -60,25 +60,25 @@ Copy the built executables into the appropriate directories under `dgupdater/bin
 #### Windows (PowerShell)
 
 ```powershell
-Copy-Item native-builds/dgupdater-macos-latest/dist/dgupdaterupdate dgupdater/bin/macos/
-Copy-Item native-builds/dgupdater-ubuntu-latest/dist/dgupdaterupdate dgupdater/bin/linux/
-Copy-Item native-builds/dgupdater-windows-latest/dist/dgupdaterupdate.exe dgupdater/bin/windows/
+Copy-Item native-builds/dgupdater-macos-latest/dist/dgupdaterupdate_mac dgupdater/bin/dgupdaterupdate_mac
+Copy-Item native-builds/dgupdater-ubuntu-latest/dist/dgupdaterupdate_lin dgupdater/bin/dgupdaterupdate_lin
+Copy-Item native-builds/dgupdater-windows-latest/dist/dgupdaterupdate_win.exe dgupdater/bin/dgupdaterupdate_win.exe
 ```
 
 #### Windows (CMD)
 
 ```cmd
-copy native-builds\dgupdater-macos-latest\dist\dgupdaterupdate dgupdater\bin\macos\
-copy native-builds\dgupdater-ubuntu-latest\dist\dgupdaterupdate dgupdater\bin\linux\
-copy native-builds\dgupdater-windows-latest\dist\dgupdaterupdate.exe dgupdater\bin\windows\
+copy native-builds\dgupdater-macos-latest\dist\dgupdaterupdate_mac dgupdater\bin\dgupdaterupdate_mac
+copy native-builds\dgupdater-ubuntu-latest\dist\dgupdaterupdate_lin dgupdater\bin\dgupdaterupdate_lin
+copy native-builds\dgupdater-windows-latest\dist\dgupdaterupdate_win.exe dgupdater\bin\dgupdaterupdate_win.exe
 ```
 
 #### Linux / macOS (Bash)
 
 ```bash
-cp native-builds/dgupdater-macos-latest/dist/dgupdaterupdate dgupdater/bin/macos/
-cp native-builds/dgupdater-ubuntu-latest/dist/dgupdaterupdate dgupdater/bin/linux/
-cp native-builds/dgupdater-windows-latest/dist/dgupdaterupdate.exe dgupdater/bin/windows/
+cp native-builds/dgupdater-macos-latest/dist/dgupdaterupdate_mac dgupdater/bin/dgupdaterupdate_mac
+cp native-builds/dgupdater-ubuntu-latest/dist/dgupdaterupdate_lin dgupdater/bin/dgupdaterupdate_lin
+cp native-builds/dgupdater-windows-latest/dist/dgupdaterupdate_win.exe dgupdater/bin/dgupdaterupdate_win.exe
 ```
 
 > You can also copy files manually with **Ctrl+C / Ctrl+V** if you prefer.

@@ -3,7 +3,7 @@ from codecs import open as codecs_open
 
 setup(
     name="dgupdater",
-    version="1.1.5",
+    version="1.2.0",
     author="DarkGlance",
     author_email="darkglance.developer@gmail.com",
     maintainer="DarkGlance",
@@ -36,9 +36,9 @@ setup(
     ],
     package_data={
         'dgupdater': [
-            "bin/macos/dgupdaterupdate",
-            "bin/linux/dgupdaterupdate",
-            "bin/windows/dgupdaterupdate.exe"            
+            "bin/dgupdaterupdate_lin",
+            "bin/dgupdaterupdate_mac",
+            "bin/dgupdaterupdate_win.exe"            
         ]
     },
     include_package_data=True,

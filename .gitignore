@@ -5,7 +5,7 @@ notes.txt
 .env
 
 # Virtual Environments
-venv/
+.venv/
 
 # Tests
 tests/

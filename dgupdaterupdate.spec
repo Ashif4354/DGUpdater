@@ -1,7 +1,19 @@
 # -*- mode: python ; coding: utf-8 -*-
 
 from pathlib import Path
-ROOT = Path(".").resolve()
+from platform import system
+
+ROOT: str = Path(".").resolve()
+
+match system():
+    case "Windows":
+        this_os = "win"
+    case "Darwin":
+        this_os = "mac"
+    case "Linux":
+        this_os = "lin"
+    case _:
+        raise OSError(f"Unsupported OS: {system()}")
 
 a = Analysis(
     [str(ROOT / "dgupdaterupdate.py")],
@@ -24,7 +36,7 @@ exe = EXE(
     a.binaries,
     a.datas,
     [],
-    name='dgupdaterupdate',
+    name=f'dgupdaterupdate_{this_os}',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,

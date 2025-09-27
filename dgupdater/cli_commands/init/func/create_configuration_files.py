@@ -32,23 +32,26 @@ def create_configuration_files(data: dict, app_name: str, mongodbstrd: str) -> N
         dump(dgupdaterconf_json, f, indent = 4)
 
     with open('.dgupdaterignore', 'w') as f:
-        f.write('.dgupdaterignore\ndgupdaterupdate.exe\ndgupdaterupdate')
+        f.write('.dgupdaterignore\ndgupdaterupdate')
+
+    makedirs("dgupdaterupdate", exist_ok = True)
 
     this_os = system()
 
     if this_os == "Windows":
         with package_path("dgupdater") as bin_path:
-            copyfile(join(bin_path, "bin", "windows", "dgupdaterupdate.exe"), "dgupdaterupdate.exe")
+            copyfile(join(bin_path, "bin", "dgupdaterupdate_win.exe"), "dgupdaterupdate/dgupdaterupdate_win.exe")
 
     elif this_os == "Linux":
         with package_path("dgupdater") as bin_path:
-            copyfile(join(bin_path, "bin", "linux", "dgupdaterupdate"), "dgupdaterupdate")
+            copyfile(join(bin_path, "bin", "dgupdaterupdate_lin"), "dgupdaterupdate/dgupdaterupdate_lin")
 
     elif this_os == "Darwin":
         with package_path("dgupdater") as bin_path:
-            copyfile(join(bin_path, "bin", "macos", "dgupdaterupdate"), "dgupdaterupdate")
+            copyfile(join(bin_path, "bin", "dgupdaterupdate_mac"), "dgupdaterupdate/dgupdaterupdate_mac")
 
     else:
         raise OSError(f'Unsupported OS: {this_os}')
 
     
+ 

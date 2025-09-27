@@ -5,14 +5,17 @@ from shutil import copyfile
 def get_temp_file(root_dir: str, this_os: str) -> str:
     temp_dir = gettempdir()
 
+    if this_os == 'Linux':
+        temp_file = join(temp_dir, 'dgupdaterupdate_lin')
+        copyfile(join(root_dir, 'dgupdaterupdate', 'dgupdaterupdate_lin'), temp_file)
 
-    if this_os in {'Linux', 'Darwin'}:
-        temp_file = join(temp_dir, 'dgupdaterupdate')
-        copyfile(join(root_dir, 'dgupdaterupdate'), temp_file)
+    elif this_os == 'Darwin':
+        temp_file = join(temp_dir, 'dgupdaterupdate_mac')
+        copyfile(join(root_dir, 'dgupdaterupdate', 'dgupdaterupdate_mac'), temp_file)
 
     elif this_os == 'Windows':
-        temp_file = join(temp_dir, 'dgupdaterupdate.exe')
-        copyfile(join(root_dir, 'dgupdaterupdate.exe'), temp_file)
+        temp_file = join(temp_dir, 'dgupdaterupdate_win.exe')
+        copyfile(join(root_dir, 'dgupdaterupdate_win.exe'), temp_file)
 
     else:
         raise OSError(f'Unsupported OS: {this_os}')
