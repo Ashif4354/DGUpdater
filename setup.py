@@ -3,7 +3,7 @@ from codecs import open as codecs_open
 
 setup(
     name="dgupdater",
-    version="1.2.0",
+    version="1.2.1",
     author="DarkGlance",
     author_email="darkglance.developer@gmail.com",
     maintainer="DarkGlance",
