@@ -6,7 +6,6 @@ from os.path import join, exists
 from platformdirs import user_data_dir
 from importlib.resources import path as package_path
 from shutil import copyfile
-from platform import system
 
 def create_configuration_files(data: dict, app_name: str, mongodbstrd: str) -> None:
     with open("dgupdaterconf.json", "w") as f:
@@ -36,22 +35,9 @@ def create_configuration_files(data: dict, app_name: str, mongodbstrd: str) -> N
 
     makedirs("dgupdaterupdate", exist_ok = True)
 
-    this_os = system()
-
-    if this_os == "Windows":
-        with package_path("dgupdater") as bin_path:
-            copyfile(join(bin_path, "bin", "dgupdaterupdate_win.exe"), "dgupdaterupdate/dgupdaterupdate_win.exe")
-
-    elif this_os == "Linux":
-        with package_path("dgupdater") as bin_path:
-            copyfile(join(bin_path, "bin", "dgupdaterupdate_lin"), "dgupdaterupdate/dgupdaterupdate_lin")
-
-    elif this_os == "Darwin":
-        with package_path("dgupdater") as bin_path:
-            copyfile(join(bin_path, "bin", "dgupdaterupdate_mac"), "dgupdaterupdate/dgupdaterupdate_mac")
-
-    else:
-        raise OSError(f'Unsupported OS: {this_os}')
-
+    with package_path("dgupdater") as bin_path:
+        copyfile(join(bin_path, "bin", "dgupdaterupdate_win.exe"), "dgupdaterupdate/dgupdaterupdate_win.exe")
+        copyfile(join(bin_path, "bin", "dgupdaterupdate_lin"), "dgupdaterupdate/dgupdaterupdate_lin")
+        copyfile(join(bin_path, "bin", "dgupdaterupdate_mac"), "dgupdaterupdate/dgupdaterupdate_mac")
     
  
