@@ -5,7 +5,8 @@ notes.txt
 .env
 
 # Virtual Environments
-venv/
+.venv/
+linux-venv
 
 # Tests
 tests/
@@ -17,6 +18,8 @@ dgupdater.egg-info/
 dist/
 build/
 dgupdater_release/
+output/
+native-builds/
 
 # Pycache
 *.pyc

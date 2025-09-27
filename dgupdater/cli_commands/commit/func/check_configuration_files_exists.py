@@ -1,6 +1,7 @@
 from os.path import exists
-from click import UsageError
 from json import load
+
+from click import UsageError
 
 from ...init.init import dgupdaterconf_json as template_dgupdaterconf_json
 

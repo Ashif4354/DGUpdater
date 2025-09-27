@@ -1,9 +1,9 @@
 # DGUPDATER
-⚠️ This tool is currently supported only on **Windows OS** due to its reliance on native `.exe` files bundled within the package.
+
 
 ## Introduction
 
-* THIS IS A NO/LOW CODE TOOL
+* <strong>THIS IS A CROSS PLATFORM COMPATIBLE NO/LOW CODE TOOL</strong>
 
 DGUPDATER is a command line tool which helps developers to update their python applications automatically. It is a simple tool which can be used to update the application without the need of re-downloading the whole application. It is very useful when you have a large application and you want to update only a small part of the application. 
 
@@ -11,7 +11,7 @@ DGUPDATER is a command line tool which helps developers to update their python a
 
 ***This tool is not for creating the application or exporting the application. You have to do that yourself.***
 
-***Sometimes you or the user of your application may need to disable antivirus or windows defender to run the application.***
+***Sometimes you or the user of your application may need to allow this application through firewall.***
 
 ## Requirements for using dgupdater
 
@@ -61,14 +61,19 @@ dgupdater init
 * The mongodbconnection string with write access will be stored in a different place as follows
 ```
 Windows: C:/Users/<username>/AppData/local/DarkGlance/dgupdater/dgupdaterconf.json
+
+Linux: /home/<username>/.local/share/DarkGlance/dgupdater/dgupdaterconf.json
+
+MacOS: /Users/<username>/Library/Application Support/DarkGlance/dgupdater/dgupdaterconf.json
 ```
 
 * Then it will check if the application is already registered in the database or not. If it is not registered, it will register the     application in the database. or it will ask whether to overwrite the application details.
 
 * It will also create a file named `.dgupdaterignore` in the current directory.
-This file works just like the `.gitignore` file. You can add the files and directories which you want to ignore while updating the application.
+This file works just like the `.gitignore` file. (<strong>Note: wildcards are not supported)</strong>
+You can add the files and directories which you want to ignore while updating the application.
 
-* It will also create a file named `dgupdaterupdate.exe` in the current directory. This file is used to update the application. It should not be deleted, and it should be shipped with the application.
+It will also create a directory named dgupdaterupdate in the current directory. This directory will contain executables for windows, linux and macos, which is used by dgupdater to update the application. <strong>It should not be deleted, and it should be shipped with the application.</strong> On the side note: You also can keep only the executable for the OS you are shipping the application for. For example, if you are shipping the application for windows, you can keep only the windows executable in the directory and delete the linux and macos executables. and if your application is cross platform, you should keep all the three executables in the directory.
 
 * If you want to change the MongoDB connection string, you can do it by running `dgupdater init` again and providing the new connection string.
 
@@ -124,6 +129,18 @@ from dgupdater import check_update
 # Call this function in the entry point of the application
 check_update()
 ```
+
+#### Non-blocking mode
+
+By default, check_update() runs in the main thread and blocks execution.
+To run it in a separate thread, set parallel=True:
+```python
+from dgupdater import check_update
+
+# Run update check in background thread
+check_update(parallel=True)
+```
+
 * In this process the following things will happen:
 
     1. It will try to locate the `dgupdaterconf.json` file. and the location where the file is found will be considered as the root directory of the application.
@@ -137,7 +154,7 @@ check_update()
     9. The user needs to restart the application to see the changes.
 
 ## Shipping Instructions
-* You need to ship the `dgupdaterupdate.exe` and `dgupdaterconf.json` file along with the application.
+* You need to ship the `dgupdaterupdate` directory and `dgupdaterconf.json` file along with the application.
 
 
 ## 🏁 Conclusion

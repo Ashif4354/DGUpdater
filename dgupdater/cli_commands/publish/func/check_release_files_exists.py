@@ -1,13 +1,14 @@
 from os import getcwd
 from os.path import join, exists
 from json import load
+
 from click import UsageError
 
 from ...init.init import dgupdaterconf_json as template_dgupdaterconf_json
 
 def check_release_files_exists() -> None:
 
-    cwd = getcwd()
+    cwd: str = getcwd()
 
     if not exists(join(cwd, 'dgupdater_release')):
         raise UsageError('dgupdater_release directory not found. Commit the changes first.')
@@ -33,8 +34,4 @@ def check_release_files_exists() -> None:
 def check_keys(base_dict: dict, compare_dict: dict) -> bool:
     base_dict_keys, compare_dict_keys = set(base_dict.keys()), set(compare_dict.keys())
 
-    for key in base_dict_keys:
-        if key not in compare_dict_keys:
-            return True
-        
-    return False  
+    return any(key not in compare_dict_keys for key in base_dict_keys)  

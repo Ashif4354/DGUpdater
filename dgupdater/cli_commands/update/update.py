@@ -1,32 +1,35 @@
-from click import command, option, echo
 from json import load, loads
 from tqdm import tqdm
-from pymongo import MongoClient
 from os.path import join, normpath, dirname
 from os import makedirs
 from sys import exit
 from base64 import b64decode
+from contextlib import suppress
+
+from pymongo import MongoClient
+from click import command, option, echo
 
 from .func.delete_deprecated_files import delete_deprecated_files
 from .func.acknowledge_update_to_client import acknowledge_update_to_client
 
 @command()
 @option("--root", '-r', required=True, prompt = 'rootdir', help = "Root directory of the application")
-def update(root: str) -> None:
+def update(root: str) -> None:  # sourcery skip: use-dict-items
 
     echo("\nUpdating...\n")
 
     try:
         with open(join(root, 'dgupdaterconf.json'), 'r') as f:
             conf = load(f)
-    except FileNotFoundError as e:
+
+    except FileNotFoundError as _:
         echo("dgupdaterconf.json not found. Cant update the application.")
         return
-    
-    mongodbstrc = conf['mongodb_connection_string_client']
-    app_name = conf['app_name'] 
-    
-    new_files_json_string = ''
+
+    mongodbstrc: str = conf['mongodb_connection_string_client']
+    app_name: str = conf['app_name'] 
+
+    new_files_json_string: str = ''
 
     with MongoClient(mongodbstrc) as client:
         db = client['DGUPDATER']
@@ -35,16 +38,16 @@ def update(root: str) -> None:
 
         with tqdm(total = new_update_conf['no_of_chunks'], desc = "Downloading chunks", ncols = 110, unit='chunks') as pbar: #progress bar
             for i in range(new_update_conf['no_of_chunks']):
-                chunk_part = i + 1
-                chunk_name = f'{app_name}_part{chunk_part}'
+                chunk_part: int = i + 1
+                chunk_name: str = f'{app_name}_part{chunk_part}'
 
                 chunk = collection.find_one({'_id': chunk_name})
                 new_files_json_string += chunk['chunk_data']
                 pbar.update(1)
         echo() # empty line
 
-    new_files_json = loads(new_files_json_string)
-    
+    new_files_json: dict = loads(new_files_json_string)
+
     with tqdm(total = len(new_files_json), desc = "Updating files", ncols = 110, unit='files') as pbar: #progress bar
 
         for file in new_files_json:                
@@ -53,7 +56,7 @@ def update(root: str) -> None:
 
             dirs = normpath(join(root, dirname(file)))
             makedirs(dirs, exist_ok = True)
-            
+
             if isinstance(file_data, dict):
 
                 if file_data['type'] == 'base64':
@@ -67,10 +70,8 @@ def update(root: str) -> None:
 
             pbar.update(1) 
 
-    try:
+    with suppress(KeyError, PermissionError):
         delete_deprecated_files(root, conf['files_in_latest_version'], new_update_conf['files_in_latest_version'])
-    except KeyError as _:
-        pass
 
     acknowledge_update_to_client()
 

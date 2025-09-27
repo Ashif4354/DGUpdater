@@ -1,28 +1,29 @@
+from contextlib import suppress
 from pymongo import MongoClient
 from os.path import join
 from json import load
 
 def check_update_from_db(root_dir: str) -> bool:
-    conf = get_conf(root_dir)
+    conf: dict = get_conf(root_dir)
 
-    mongodbstrc = conf['mongodb_connection_string_client']
-    app_name = conf['app_name']
-    current_version = conf['version']
-    
+    mongodbstrc: str = conf['mongodb_connection_string_client']
+    app_name: str = conf['app_name']
+    current_version: str = conf['version']
+
 
     with MongoClient(mongodbstrc) as client:
         db = client['DGUPDATER']
         collection = db[app_name]
 
         data = collection.find_one({'obj_type': 'config'})
-        
-        try:
+
+        with suppress(KeyError):
+            
             if (data is not None and 
                 data['version'] != current_version and 
                 data['update_ready']):
                 return True
-        except KeyError as _: 
-            pass
+            
         return False
 
 

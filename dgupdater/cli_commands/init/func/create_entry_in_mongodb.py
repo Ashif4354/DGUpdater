@@ -2,6 +2,7 @@ from pymongo import MongoClient
 from click import UsageError
 
 def create_entry_in_mongodb(dgupdaterconf_json: dict[str:any], mongodbstrd: str, over_write: bool) -> None:
+    
     try:
         with MongoClient(mongodbstrd) as client:
 
@@ -13,5 +14,6 @@ def create_entry_in_mongodb(dgupdaterconf_json: dict[str:any], mongodbstrd: str,
                 
 
             collection.insert_one(dgupdaterconf_json)
-    except Exception as _:
-        raise UsageError("Error while creating entry in MongoDB: ")
+
+    except Exception as e:
+        raise UsageError("Error while creating entry in MongoDB: ") from e
