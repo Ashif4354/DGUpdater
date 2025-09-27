@@ -41,7 +41,17 @@ gh run list --workflow native-builder.yml --repo Ashif4354/dgupdater --limit 1
 
 ---
 
-### 6. Download build artifacts
+### 6. Delete old build artifacts
+
+Delete any old build artifacts from the `native-builds` directory before downloading new ones.
+
+```bash
+rm -rf native-builds # Linux / macOS
+rmdir /s /q native-buildss # Windows cmd
+Remove-Item -Recurse -Force native-builds -ErrorAction SilentlyContinue # Windows pwsh
+```
+
+### 7. Download new build artifacts
 
 Download the artifacts produced by the workflow run:
 
@@ -53,7 +63,7 @@ Replace `<run-id>` with the actual ID from the previous step.
 
 ---
 
-### 7. Copy executables into project structure
+### 8. Copy executables into project structure
 
 Copy the built executables into the appropriate directories under `dgupdater/bin/`.
 
@@ -85,25 +95,25 @@ cp native-builds/dgupdater-windows-latest/dist/dgupdaterupdate_win.exe dgupdater
 
 ---
 
-### 8. Update version number
+### 9. Update version number
 
 Update the version string in `setup.py` according to whether this is a minor or patch release.
 
 ---
 
-### 9. Create PR
+### 10. Create PR
 
 Open a pull request from your feature branch to `main`.
 
 ---
 
-### 10. Merge PR
+### 11. Merge PR
 
 Merge the pull request after approval.
 
 ---
 
-### 11. Create release
+### 12. Create release
 
 Create a GitHub release with the new version tag. The GitHub Actions workflow will automatically publish the new version to PyPI.
 

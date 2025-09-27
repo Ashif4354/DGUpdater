@@ -1,5 +1,5 @@
 from os.path import join
-from os import gettempdir
+from tempfile import gettempdir
 from shutil import copyfile
 
 def get_temp_file(root_dir: str, this_os: str) -> str:
