@@ -24,7 +24,7 @@ def get_version() -> list[int]:
     with open('dgupdaterconf.json', 'r') as f:
         version: str = load(f)['version']
 
-        if version == "Version will be updated after publishing the changes":
+        if version == "Version will be updated after publishing the changes.":
             return [0, 0, 0]
 
         try:
