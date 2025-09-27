@@ -2,18 +2,18 @@ from os import walk, getcwd
 from os.path import normpath
 
 
-def find_files() -> list:
+def find_files() -> list:  # sourcery skip: use-any, use-named-expression
     
-    files_ = []
-    retrieved_files = []
+    files_: list = []
+    retrieved_files: list = []
 
-    ignored_list = get_ignore_list()
+    ignored_list: list = get_ignore_list()
     ignored_list.append('dgupdater_release')
 
     for root, dirs, files in walk(getcwd()):
 
         # start: Ignore files logic
-        ignore = False
+        ignore: bool = False
         for ignored in ignored_list:
             if ignored in root:
                 ignore = True
@@ -22,8 +22,8 @@ def find_files() -> list:
             continue
         # end: Ignore files logic
 
-        dirs = [dir for dir in dirs if dir not in ignored_list]
-        files = [file for file in files if file not in ignored_list]
+        dirs: list[str] = [dir for dir in dirs if dir not in ignored_list]
+        files: list[str] = [file for file in files if file not in ignored_list]
      
         files_.append((normpath(root), dirs, files))
 

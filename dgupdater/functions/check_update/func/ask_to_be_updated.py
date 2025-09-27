@@ -1,7 +1,7 @@
 from subprocess import run
 
 def ask_to_be_updated(this_os: str) -> bool:
-    question = "New update is available for the application. Do you want to update now?"
+    question: str = "New update is available for the application. Do you want to update now?"
 
     if this_os == 'Darwin':
         result = run(

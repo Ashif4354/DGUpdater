@@ -1,6 +1,6 @@
 from json import load, dump
-from dgupdater import check_update
 from time import sleep
+from dgupdater import check_update
 
 def neutralize_app_version() -> None:
     with open('dgupdaterconf.json', 'r') as f:

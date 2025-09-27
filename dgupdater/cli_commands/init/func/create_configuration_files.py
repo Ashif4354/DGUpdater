@@ -1,24 +1,25 @@
-from contextlib import suppress
-from json import dump, load
-from json.decoder import JSONDecodeError
 from os import makedirs
 from os.path import join, exists
-from platformdirs import user_data_dir
+from json import dump, load
+from json.decoder import JSONDecodeError
+from contextlib import suppress
 from importlib.resources import path as package_path
 from shutil import copyfile
+
+from platformdirs import user_data_dir
 
 def create_configuration_files(data: dict, app_name: str, mongodbstrd: str) -> None:
     with open("dgupdaterconf.json", "w") as f:
         dump(data, f, indent = 4)
 
-    dgupdater_dir = user_data_dir("dgupdater", "DarkGlance")
+    dgupdater_dir: str = user_data_dir("dgupdater", "DarkGlance")
     makedirs(dgupdater_dir, exist_ok = True)
 
-    dgupdaterconf_json = {
+    dgupdaterconf_json: dict = {
         'mongodbstrds': {}
     }
 
-    file = join(dgupdater_dir, "dgupdaterconf.json")
+    file: str = join(dgupdater_dir, "dgupdaterconf.json")
 
     with suppress(JSONDecodeError):
         if exists(file):

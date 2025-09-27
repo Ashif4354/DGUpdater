@@ -11,7 +11,7 @@ from .func.get_temp_file import get_temp_file
 def check_update(parallel: bool = False) -> None:
     def _check_update() -> None:
         try:
-            root_dir = find_root_directory()
+            root_dir: str = find_root_directory()
         except FileNotFoundError as _:
             print("'dgupdaterconf.json' file not found, cant check for new updates. But you can still use the application.")
             return

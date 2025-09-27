@@ -3,7 +3,7 @@ from tempfile import gettempdir
 from shutil import copyfile
 
 def get_temp_file(root_dir: str, this_os: str) -> str:
-    temp_dir = gettempdir()
+    temp_dir: str = gettempdir()
 
     if this_os == 'Linux':
         temp_file = join(temp_dir, 'dgupdaterupdate_lin')

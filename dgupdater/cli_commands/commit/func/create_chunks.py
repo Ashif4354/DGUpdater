@@ -1,27 +1,28 @@
 from json import dump
 from math import ceil
-from tqdm import tqdm
 from os.path import join
 from os import getcwd
+
+from tqdm import tqdm
 
 
 def create_chunks(release_json_str: str, app_name: str) -> int:
     
-    MAX_CHUNK_SIZE = 1_000_000 # 10 Lakh (or) 1 Million
+    MAX_CHUNK_SIZE: int = 1_000_000 # 10 Lakh (or) 1 Million
 
-    release_json_size = len(release_json_str)
+    release_json_size: int = len(release_json_str)
 
-    no_of_chunks = ceil(release_json_size / MAX_CHUNK_SIZE)
+    no_of_chunks: int = ceil(release_json_size / MAX_CHUNK_SIZE)
     
-    start = 0
+    start: int = 0
     
     with tqdm(total = no_of_chunks, desc = "Creating Chunks", ncols = 110, unit='chunks') as pbar: # progres bar
         
         for i in range(no_of_chunks):
-            chunk_part = i + 1
-            chunk_name = f'{app_name}_part{chunk_part}'
+            chunk_part: int = i + 1
+            chunk_name: str = f'{app_name}_part{chunk_part}'
 
-            chunk = release_json_str[start:start + MAX_CHUNK_SIZE]        
+            chunk: str = release_json_str[start:start + MAX_CHUNK_SIZE]        
             chunk = {
                 'obj_type': 'chunk',
                 '_id': chunk_name,

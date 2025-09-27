@@ -2,7 +2,8 @@ from os import getcwd, listdir
 from os.path import dirname, normpath
 
 def find_root_directory() -> str:
-    cwd = getcwd()
+    cwd: str = getcwd()
+    
     while True:
         if 'dgupdaterconf.json' in listdir(cwd):
             return normpath(cwd)

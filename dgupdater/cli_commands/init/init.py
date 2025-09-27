@@ -5,7 +5,7 @@ from .func.check_app_exists import check_app_exists
 from .func.create_entry_in_mongodb import create_entry_in_mongodb
 from .func.create_configuration_files import create_configuration_files
 
-parameters = {
+parameters: dict = {
     'name': {
         'prompt': "Name of the Application",
         'help': "The name of the Application. It should be unique for every app "
@@ -48,6 +48,7 @@ def init(name: str, mongodbstrd: str, mongodbstrc: str) -> None:
     if app_exists and not over_write:
         echo("Initialization Aborted.")
         return
+    
     elif app_exists:
         echo("Overwriting the existing application.")    
 

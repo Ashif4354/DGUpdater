@@ -1,7 +1,7 @@
 from subprocess import Popen
 
 def open_updater(temp_file: str, root_dir: str, this_os: str) -> None:
-    kwargs_for_popen = {}
+    kwargs_for_popen: dict = {}
 
     if this_os in {'Darwin', 'Linux'}:
         kwargs_for_popen['start_new_session'] = True

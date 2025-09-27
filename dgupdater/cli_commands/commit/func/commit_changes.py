@@ -2,25 +2,24 @@ from os import makedirs, getcwd
 from os.path import join
 from json import load, dump, dumps
 from shutil import rmtree
+from base64 import b64encode
+from contextlib import suppress
+
 from tqdm import tqdm
 from click import echo
-from base64 import b64encode
 
 from .find_files import find_files
 from .create_chunks import create_chunks
 
 def commit_changes() -> None:
 
-    try:
+    with suppress(FileNotFoundError):
         rmtree('dgupdater_release/chunks') # Removing the chunks directory and its contents if it exists
-    except FileNotFoundError as _:
-        pass
-
     makedirs('dgupdater_release/chunks', exist_ok = True)
 
-    release_json = {}
+    release_json: dict = {}
 
-    release_files = find_files()
+    release_files: list[str] = find_files()
 
     with open('dgupdaterconf.json', 'r') as f:
         dgupdaterconf_json = load(f)
@@ -30,11 +29,11 @@ def commit_changes() -> None:
 
         with open('dgupdaterconf.json', 'w') as f:          
             dump(dgupdaterconf_json, f, indent = 4)
-    
+
     with tqdm(total = len(release_files), desc = "Loading files", ncols = 110, unit='files') as pbar: # progress bar
         for file in release_files:
 
-            file_path = f'{getcwd()}{file}'
+            file_path: str = f'{getcwd()}{file}'
 
             try:
                 with open(file_path, 'r') as f:
@@ -48,15 +47,16 @@ def commit_changes() -> None:
                     }
             finally:
                 pbar.update(1)
+
     echo() # empty line
 
     release_json_str = dumps(release_json)
 
     with open('dgupdaterconf.json', 'r') as f:
-        dgupdaterconf_json = load(f)
+        dgupdaterconf_json: dict = load(f)
 
-    no_of_chunks = create_chunks(release_json_str, dgupdaterconf_json['app_name']) #creating chunks as well as getting the number of chunks
-    
+    no_of_chunks: int = create_chunks(release_json_str, dgupdaterconf_json['app_name']) #creating chunks as well as getting the number of chunks
+
     dgupdaterconf_json['update_ready'] = False
     dgupdaterconf_json['no_of_chunks'] = no_of_chunks
 
