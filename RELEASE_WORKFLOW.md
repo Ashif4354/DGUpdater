@@ -71,23 +71,23 @@ Copy the built executables into the appropriate directories under `dgupdater/bin
 
 ```powershell
 Copy-Item native-builds/dgupdater-macos-latest/dist/dgupdaterupdate_mac dgupdater/bin/dgupdaterupdate_mac
-Copy-Item native-builds/dgupdater-ubuntu-latest/dist/dgupdaterupdate_lin dgupdater/bin/dgupdaterupdate_lin
+Copy-Item native-builds/dgupdater-ubuntu-20-darkglance/dist/dgupdaterupdate_lin dgupdater/bin/dgupdaterupdate_lin
 Copy-Item native-builds/dgupdater-windows-latest/dist/dgupdaterupdate_win.exe dgupdater/bin/dgupdaterupdate_win.exe
 ```
 
 #### Windows (CMD)
 
 ```cmd
-copy native-builds\dgupdater-macos-latest\dist\dgupdaterupdate_mac dgupdater\bin\dgupdaterupdate_mac
-copy native-builds\dgupdater-ubuntu-latest\dist\dgupdaterupdate_lin dgupdater\bin\dgupdaterupdate_lin
-copy native-builds\dgupdater-windows-latest\dist\dgupdaterupdate_win.exe dgupdater\bin\dgupdaterupdate_win.exe
+copy /Y /V native-builds\dgupdater-macos-latest\dist\dgupdaterupdate_mac dgupdater\bin\dgupdaterupdate_mac
+copy /Y /V native-builds\dgupdater-ubuntu-20-darkglance\dist\dgupdaterupdate_lin dgupdater\bin\dgupdaterupdate_lin
+copy /Y /V native-builds\dgupdater-windows-latest\dist\dgupdaterupdate_win.exe dgupdater\bin\dgupdaterupdate_win.exe
 ```
 
 #### Linux / macOS (Bash)
 
 ```bash
 cp native-builds/dgupdater-macos-latest/dist/dgupdaterupdate_mac dgupdater/bin/dgupdaterupdate_mac
-cp native-builds/dgupdater-ubuntu-latest/dist/dgupdaterupdate_lin dgupdater/bin/dgupdaterupdate_lin
+cp native-builds/dgupdater-ubuntu-20-darkglance/dist/dgupdaterupdate_lin dgupdater/bin/dgupdaterupdate_lin
 cp native-builds/dgupdater-windows-latest/dist/dgupdaterupdate_win.exe dgupdater/bin/dgupdaterupdate_win.exe
 ```
 
