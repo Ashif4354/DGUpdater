@@ -23,7 +23,7 @@ jobs:
         if: runner.os == 'Linux'
         run: |
           sudo apt-get update
-          sudo apt-get install -y binutils
+          sudo apt-get install -y binutils zip
 
       - name: Setup Python
         uses: actions/setup-python@v4
